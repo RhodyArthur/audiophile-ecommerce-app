@@ -1,0 +1,35 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+.hidden
+    display: none
+
+header
+    @include flex-container(flex, space-between, center, row)
+    padding: 2rem 1.5rem
+    background-color: $black
+    color: $white
+
+    nav
+        @extend .sub-title
+
+
+
+@include mq(desktop)
+    header
+
+        .menu
+            display: none
+
+        nav
+            @include flex-container(flex, space-between, center, row)
+            gap: pxToRem(34)
+
+            a
+                text-decoration: none
+                cursor: pointer
+
+                &:hover
+                    color: $primary-orange
