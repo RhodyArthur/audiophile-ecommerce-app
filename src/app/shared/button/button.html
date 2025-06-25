@@ -1,0 +1,9 @@
+<button
+    [disabled]="disabled || loading"
+    [class]="['btn', 'btn-' + variant()]"
+>
+    @if (loading()) {
+        <span>loading</span>
+    }
+    {{label()}}
+</button>
