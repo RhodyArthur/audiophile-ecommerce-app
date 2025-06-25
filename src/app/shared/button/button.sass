@@ -1,0 +1,32 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+.btn
+    @extend .sub-title
+    padding: 1rem 2rem
+    font-weight: 400
+    text-transform: uppercase
+    cursor: pointer
+    border: 1px solid transparent
+    outline: none
+
+
+.btn-primary
+    background-color: $primary-orange
+    color: $white
+
+    &:hover
+        background-color: $primary-peach
+
+.btn-secondary
+    background-color: $white
+    color: $black
+    border: 1px solid $black
+
+    &:hover
+        background-color: $black
+        color: $white
+
+

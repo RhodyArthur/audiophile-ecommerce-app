@@ -1,0 +1,13 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+
+@include mq(desktop)
+main
+    @include flex-container(flex, null, null, column)
+    gap: pxToRem(120)
+    
+    .hero
+        background-color: $black100
