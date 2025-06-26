@@ -1,4 +1,29 @@
 <main>
     <app-speakerx9-card/>
-    hello
+    
+    <section class="speaker-zx7">
+        <picture>
+            <source media="(min-width: 1440px)" srcset="/assets/home/desktop/image-speaker-zx7.jpg">
+            <source media="(min-width: 768px)" srcset="/assets/home/tablet/image-speaker-zx7.jpg">
+            <img src="/assets/home/mobile/image-speaker-zx7.jpg" alt="speaker" />
+        </picture>
+
+        <div class="info">
+            <h2>zx7 speaker</h2>
+            <app-button [variant]="'secondary'"/>
+        </div>
+    </section>
+
+    <section class="yx1-earphones">
+        <picture>
+            <source media="(min-width: 1440px)" srcset="/assets/home/desktop/image-earphones-yx1.jpg">
+            <source media="(min-width: 768px)" srcset="/assets/home/tablet/image-earphones-yx1.jpg">
+            <img src="/assets/home/mobile/image-earphones-yx1.jpg" alt="speaker" />
+        </picture>
+
+        <div class="card">
+            <h2>yx1 earphones</h2>
+            <app-button [variant]="'secondary'"/>
+        </div>
+    </section>
 </main>

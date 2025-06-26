@@ -11,5 +11,5 @@ export class Button {
   variant = input<'primary' | 'secondary' | 'accent'>('primary')
   disabled = input<boolean>(false)
   loading = input<boolean>(false)
-  label = input<string>('')
+  label = input<string>('See Product')
 }
