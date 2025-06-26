@@ -1,0 +1,22 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+
+main
+    @include flex-container(flex, center, center, column)
+    gap: 1.5rem
+    padding-inline: 1.5rem
+    border: 1px solid green
+
+
+@include mq(tablet)
+    main
+        padding-inline: 2.5rem
+
+@include mq(desktop)
+    main
+        max-width: 1110px
+        margin: auto
+        padding: 0
