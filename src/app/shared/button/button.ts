@@ -8,7 +8,7 @@ import { Component, input } from '@angular/core';
 })
 export class Button {
   type = input<'button' | 'submit' | 'reset'>('button')
-  variant = input<'primary' | 'secondary' | 'accent'>('primary')
+  variant = input<'primary' | 'secondary' | 'accent' | 'primary-login'>('primary')
   disabled = input<boolean>(false)
   loading = input<boolean>(false)
   label = input<string>('See Product')

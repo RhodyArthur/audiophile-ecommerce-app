@@ -3,7 +3,7 @@
 @use '../../../styles/_variables' as *
 @use '../../../styles/_typography' as *
 
-main
+footer
     @include flex-container(flex, center, center, column)
     gap: pxToRem(48)
     padding-inline: 1.5rem
@@ -47,7 +47,7 @@ main
                     background-color: $primary-orange
 
 @include mq(tablet)
-    main
+    footer
         align-items: flex-start
         padding-inline: 2.5rem
         gap: pxToRem(60)
@@ -73,7 +73,7 @@ main
             justify-content: space-between
 
 @include mq(desktop)
-    main
+    footer
         max-width: pxToRem(1110)
         margin: auto
         padding-inline: 0
