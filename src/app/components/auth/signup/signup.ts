@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-signup',
   imports: [RouterLink, RouterLinkActive],
-  templateUrl: './login.html',
-  styleUrl: './login.sass'
+  templateUrl: './signup.html',
+  styleUrl: './signup.sass'
 })
-export class Login {
+export class Signup {
 
 }
