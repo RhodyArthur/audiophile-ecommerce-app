@@ -4,10 +4,11 @@
     <h3>audiophile</h3>
 
     <nav class="hidden">
-        <a>HOME</a>
-        <a>HEADPHONES</a>
-        <a>SPEAKERS</a>
-        <a>EARPHONES</a>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">HOME</a>
+        <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">HEADPHONES</a>
+        <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">SPEAKERS</a>
+        <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">EARPHONES</a>
+        <a routerLink="login">LOGIN</a>
     </nav>
 
     <img src="/assets/icons/cart.svg" alt="cart icon">

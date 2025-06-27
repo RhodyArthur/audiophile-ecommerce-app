@@ -1,0 +1,74 @@
+<main>
+    <h2>🛒 audiophile</h2>
+    
+    <section>
+        <h1>Sign up</h1>
+        
+        <form [formGroup]="signupForm" (ngSubmit)="submit()">
+
+            <div class="input-fields">
+
+                <div class="input-group">
+                    <input type="text" name="name" id="name" placeholder="Full name" formControlName="fullName">
+                    @if(signupForm.get('fullName')?.invalid && (signupForm.get('fullName')?.touched || signupForm.get('fullName')?.dirty)){
+                    @if (signupForm.get('fullName')?.errors?.['required']) {
+                        <small class="error">Can't be empty</small>
+                    }
+                    @if (signupForm.get('fullName')?.errors?.['minlength']) {
+                        <small class="error">Full name must be at least 3 characters</small>
+                    }
+                }
+                </div>
+
+                <div class="input-group">
+                    <input type="email" name="email" id="email" placeholder="Email address" formControlName="email">
+                    @if (signupForm.get('email')?.invalid && (signupForm.get('email')?.touched || signupForm.get('email')?.dirty)) {
+                    @if (signupForm.get('email')?.errors?.['required']) {
+                        <small class="error">Can't be empty</small>
+                    }
+                    @if (signupForm.get('email')?.errors?.['email']) {
+                        <small class="error">Invalid Email</small>
+                    }
+                }
+                </div>
+    
+                <div class="input-group">
+                    <input type="password" name="password" id="password" placeholder="Password" formControlName="password">
+                    @if(signupForm.get('password')?.invalid && (signupForm.get('password')?.touched || signupForm.get('password')?.dirty)){
+                    @if (signupForm.get('password')?.errors?.['required']) {
+                        <small class="error">Can't be empty</small>
+                    }
+                    @if (signupForm.get('password')?.errors?.['minlength']) {
+                        <small class="error">Password must be at least 8 characters</small>
+                    }
+                    <br/>
+                    @if (signupForm.get('password')?.errors?.['passwordStructure']) {
+                        <small class="warn">Password should include at least an uppercase, lowercase, special character and a digit.</small>
+                    }
+                }
+                </div>
+    
+                <div class="input-group">
+                    <input type="password" name="repeatPassword"  placeholder="Confirm Password" formControlName="repeatPassword">
+                    @if(signupForm.get('repeatPassword')?.invalid && (signupForm.get('repeatPassword')?.touched || signupForm.get('repeatPassword')?.dirty)){
+                        @if (signupForm.get('repeatPassword')?.errors?.['required']) {
+                            <small class="error">Can't be empty</small>
+                        }
+                        @if (signupForm.errors?.['mismatch'] && (signupForm.get('repeatPassword')?.touched || signupForm.get('repeatPassword')?.dirty)) {
+                            <small class="error"> Passwords must match. </small>
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="btn-container">
+
+                <button type="submit" [disabled]="signupForm.invalid">Create an account</button>
+
+                <p>Don't have an account?
+                    <a routerLink="/login" routerLinkActive="active" aria-label="Sign up">Login</a>
+                </p>
+            </div>
+        </form>
+    </section>
+</main>

@@ -4,5 +4,14 @@ import { Footer } from './components/footer/footer';
 
 export const routes: Routes = [
     {path: '', component: Home},
+
+    {
+        path: 'login',
+        loadComponent: () => import('../app/components/auth/login/login').then(m => m.Login)
+    },
+    {
+        path: 'signup',
+        loadComponent: () => import('../app/components/auth/signup/signup').then(m => m.Signup)
+    },
     {path: '**', component: Footer}
 ];
