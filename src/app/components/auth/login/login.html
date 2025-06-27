@@ -4,22 +4,34 @@
     <section>
         <h1>Login</h1>
         
-        <form>
+        <form [formGroup]="loginFom" (ngSubmit)="submit()">
 
             <div class="input-fields">
 
                 <div class="input-group">
-                    <input type="email" name="email" id="email" placeholder="Email address">
+                    <input type="email" name="email" id="email" placeholder="Email address" formControlName="email">
+                    @if (loginFom.get('email')?.invalid && (loginFom.get('email')?.touched || loginFom.get('email')?.dirty)) {
+                    @if (loginFom.get('email')?.errors?.['required']) {
+                        <small class="error">Can't be empty</small>
+                    }
+                    @if (loginFom.get('email')?.errors?.['email']) {
+                        <small class="error">Invalid Email</small>
+                    }
+                }
                 </div>
     
                 <div class="input-group">
-                    <input type="password" name="password" id="password" placeholder="Password">
+                    <input type="password" name="password" id="password" placeholder="Password" formControlName="password">
+                    @if(loginFom.get('password')?.invalid && (loginFom.get('password')?.touched || loginFom.get('password')?.dirty)){
+                    @if (loginFom.get('password')?.errors?.['required']) {
+                        <small class="error">Can't be empty</small>
+                    }}
                 </div>
             </div>
 
             <div class="btn-container">
 
-                <button type="submit">Log in to your account</button>
+                <button type="submit" [disabled]="!loginFom.valid">Log in to your account</button>
 
                 <p>Don't have an account?
                     <a routerLink="/signup" routerLinkActive="active" aria-label="Sign up">Sign Up</a>
