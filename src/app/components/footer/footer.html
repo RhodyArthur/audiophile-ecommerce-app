@@ -9,10 +9,10 @@
             <img src="/assets/shared/desktop/logo.svg" alt="audiophile logo">
         
             <nav>
-                <a>Home</a>
-                <a>headphones</a>
-                <a>speakers</a>
-                <a>earphones</a>
+                <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">home</a>
+                <a [routerLink]="['product/', 'headphones']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">headphones</a>
+                <a  [routerLink]="['product/', 'speakers']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">speakers</a>
+                <a  [routerLink]="['product', 'earphones']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">earphones</a>
             </nav>
         </div>
     

@@ -5,9 +5,9 @@
 
     <nav class="hidden">
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">HOME</a>
-        <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">HEADPHONES</a>
-        <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">SPEAKERS</a>
-        <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">EARPHONES</a>
+        <a routerLinkActive="active" [routerLink]="['product/', 'headphones']" [routerLinkActiveOptions]="{ exact: true }">HEADPHONES</a>
+        <a routerLinkActive="active" [routerLink]="['product/', 'speakers']" [routerLinkActiveOptions]="{ exact: true }">SPEAKERS</a>
+        <a routerLinkActive="active" [routerLink]="['product/', 'earphones']" [routerLinkActiveOptions]="{ exact: true }">EARPHONES</a>
         <a routerLink="login">LOGIN</a>
     </nav>
 
