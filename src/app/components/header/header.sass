@@ -19,8 +19,6 @@ header
     nav
         @extend .sub-title
 
-.active
-    color: $primary-orange
 
 
 @include mq(desktop)
@@ -41,6 +39,6 @@ header
                 cursor: pointer
                 color: $white
 
-                &:hover, &:active, &:focus-within, &:focus-visible
+                &:hover, &.active
                     color: $primary-orange
                     
