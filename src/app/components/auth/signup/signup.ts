@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { passwordMatchValidator } from '../../../shared/validators/passwordMatch';
+import { passwordStructureValidator } from '../../../shared/validators/passwordStructure';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +18,7 @@ export class Signup {
   signupForm: FormGroup = this.fb.group({
     fullName: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
+    password: ['', [Validators.required, Validators.minLength(8), passwordStructureValidator()]],
     repeatPassword: ['', Validators.required]
   }, {validators: passwordMatchValidator})
 

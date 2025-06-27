@@ -41,6 +41,10 @@
                     @if (signupForm.get('password')?.errors?.['minlength']) {
                         <small class="error">Password must be at least 8 characters</small>
                     }
+                    <br/>
+                    @if (signupForm.get('password')?.errors?.['passwordStructure']) {
+                        <small class="warn">Password should include at least an uppercase, lowercase, special character and a digit.</small>
+                    }
                 }
                 </div>
     
