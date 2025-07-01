@@ -14,7 +14,7 @@ export const routes: Routes = [
         loadComponent: () => import('../app/components/auth/signup/signup').then(m => m.Signup)
     },
     {
-        path: 'product/:categoty',
+        path: 'product/:category',
         loadComponent: () => import('../app/components/products/products').then(m => m.Products)
     },
     {path: '**', component: Footer}
