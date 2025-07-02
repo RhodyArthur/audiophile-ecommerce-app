@@ -19,6 +19,9 @@ export class Products implements OnInit {
   category = signal<string>('');
   private productsService = inject(ProductsService);
   private route = inject(ActivatedRoute);
+  isLoading = signal<boolean>(false);
+  errorMessage = signal<string>('');
+
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -33,7 +36,17 @@ export class Products implements OnInit {
 
 
   async categoryProducts(category: string) {
-    let products = await this.productsService.fetchProductsByCategory(category)
-    this.products.set(products)
+    this.isLoading.set(true);
+
+    try {
+      let products = await this.productsService.fetchProductsByCategory(category)
+      this.products.set(products.reverse())
+    }
+    catch (err) {
+      console.error('Failed to load products', err);
+      this.errorMessage.set('Failed to load products')
+    } finally {
+      this.isLoading.set(false);
+    }
   }
 }

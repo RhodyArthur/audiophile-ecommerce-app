@@ -62,6 +62,14 @@ main
             .description-button
                 gap: 1.5rem
 
+@media (min-width: 1024px)
+    main
+        width: 100%
+
+        .image-container
+            width: 100%
+            height: pxToRem(680)
+
 @include mq(desktop)
     main
         justify-content: space-between
@@ -69,5 +77,19 @@ main
         gap: pxToRem(125)
 
         .image-container
-            width: pxToRem(540)
+            width: pxToRem(540) 
             height: pxToRem(560)
+
+
+        section
+            width: pxToRem(445)
+            align-items: flex-start
+
+            .name-container, .description-button
+                align-items: flex-start
+                justify-content: flex-start
+                text-align: left
+
+    :host-context(.product-list :nth-child(even)) main
+        flex-direction: row-reverse
+

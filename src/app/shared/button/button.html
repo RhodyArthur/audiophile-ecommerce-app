@@ -1,6 +1,6 @@
 <button
-    [disabled]="disabled || loading"
     [class]="['btn', 'btn-' + variant()]"
+    (click)="onButtonClicked()"
 >
     @if (loading()) {
         <span>loading</span>

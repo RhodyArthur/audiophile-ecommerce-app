@@ -1,4 +1,7 @@
 <main>
+    @if (isLoading()) {
+        <p>loading...</p>
+    }
     <div class="image-container">
         @for (productImage of productImages(); track $index) {
             @if (productImage.product_id === productId()) {
@@ -24,7 +27,7 @@
         <div class="description-button">
             <p>{{product()?.description}}</p>
     
-            <app-button/>
+            <app-button [id]="productId()" (buttonClicked)="handleButtonClicked($event)"></app-button>
         </div>
     </section>
 </main>
