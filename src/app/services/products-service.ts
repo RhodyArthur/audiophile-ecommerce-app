@@ -1,13 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { SupabaseService } from './supabase-service';
-import { Product } from '../models/product';
+import { Product, ProductImageSet } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-    private supabaseService = inject(SupabaseService);
+  private supabaseService = inject(SupabaseService);
 
 
   async fetchProducts(): Promise<Product[]> {
@@ -39,5 +39,21 @@ export class ProductsService {
     }
 
     return data as Product[]
+  }
+
+  async fetchProductImagesById(id: number) {
+    const { data, error } = await this.supabaseService
+    .getClient()
+    .from('product_images')
+    .select('*')
+    .eq('product_id', id)
+    .order('id', {ascending: true});
+
+    if (error) {
+      console.error(error)
+      return []
+    }
+
+    return data as ProductImageSet[]
   }
 }

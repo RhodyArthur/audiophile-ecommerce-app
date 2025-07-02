@@ -1,0 +1,73 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+main
+    @include flex-container(flex, center, center, column)
+    gap: 2rem
+
+    .image-container
+        picture
+            img
+                border-radius: 0.5rem
+
+    section, .name-container, .description-button
+        @include flex-container(flex, center, center, column)
+        gap: 1.5rem
+        text-align: center
+
+        .name-container
+            text-transform: uppercase
+
+            h4
+                color: $primary-orange
+                @extend .overline
+                font-weight: 400
+                letter-spacing: 10px
+
+            h1
+                @extend .h4-manrope-bold
+
+        .description-button
+            p
+                @extend .body-medium
+                color: $black
+                opacity: 0.5
+
+@include mq(tablet)
+    main
+        gap: pxToRem(52)
+
+        .image-container
+            width: pxToRem(689)
+            height: pxToRem(510)
+
+            picture
+                img
+                    width: 100%
+                    height: 100%
+
+
+        section
+            gap: 2rem
+            width: pxToRem(572)
+
+            .name-container
+                gap: 1rem
+
+                h1
+                    font-size: 2.5rem
+
+            .description-button
+                gap: 1.5rem
+
+@include mq(desktop)
+    main
+        justify-content: space-between
+        flex-direction: row
+        gap: pxToRem(125)
+
+        .image-container
+            width: pxToRem(540)
+            height: pxToRem(560)

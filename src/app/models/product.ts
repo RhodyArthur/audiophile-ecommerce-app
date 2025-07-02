@@ -2,22 +2,20 @@ export interface Product {
   id: number;
   slug: string;
   name: string;
-  image: ProductImageSet;
   category: string;
-  categoryImage: ProductImageSet;
   new: boolean;
   price: number;
   description: string;
   features: string;
-  includes: IncludedItem[];
-  gallery: ProductGallery;
-  others: RelatedProduct[];
 }
 
 export interface ProductImageSet {
-  mobile: string;
-  tablet: string;
-  desktop: string;
+  id: number;
+  product_id: number;
+  type: string;
+  mobile_url: string;
+  tablet_url: string;
+  desktop_url: string;
 }
 
 export interface IncludedItem {

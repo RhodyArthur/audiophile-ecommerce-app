@@ -6,10 +6,11 @@ import { Footer } from "../../components/footer/footer";
 import { About } from "../../components/about/about";
 import { HomeProducts } from "../../components/home-products/home-products";
 import { ProductsCategory } from "../../components/products-category/products-category";
+import { ProductCard } from "../../components/product-card/product-card";
 
 @Component({
   selector: 'app-products',
-  imports: [Footer, About, ProductsCategory],
+  imports: [Footer, About, ProductsCategory, ProductCard],
   templateUrl: './products.html',
   styleUrl: './products.sass'
 })
@@ -33,6 +34,6 @@ export class Products implements OnInit {
 
   async categoryProducts(category: string) {
     let products = await this.productsService.fetchProductsByCategory(category)
-      this.products.set(products)
+    this.products.set(products)
   }
 }
