@@ -2,14 +2,18 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { Product } from '../../models/product';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../services/products-service';
+import { Footer } from "../../components/footer/footer";
+import { About } from "../../components/about/about";
+import { HomeProducts } from "../../components/home-products/home-products";
+import { ProductsCategory } from "../../components/products-category/products-category";
 
 @Component({
   selector: 'app-products',
-  imports: [],
+  imports: [Footer, About, ProductsCategory],
   templateUrl: './products.html',
   styleUrl: './products.sass'
 })
-export class Products implements OnInit{
+export class Products implements OnInit {
   products = signal<Product[]>([]);
   category = signal<string>('');
   private productsService = inject(ProductsService);
