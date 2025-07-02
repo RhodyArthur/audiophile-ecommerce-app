@@ -1,0 +1,18 @@
+<main>
+    <header>{{category()}}</header>
+
+    @if (isLoading()) {
+        <p>loading...</p>
+    }
+    <div class="product-list">
+        @for (product of products(); track $index) {
+    
+            <app-product-card [product]="product"/>
+        }
+    </div>
+    <app-products-category/>
+    <app-about/>
+    <div class="footer">
+        <app-footer/>
+    </div>
+</main>
