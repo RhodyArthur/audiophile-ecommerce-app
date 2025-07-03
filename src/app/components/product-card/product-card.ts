@@ -19,7 +19,7 @@ export class ProductCard {
   productId = signal<number>(0);
   isLoading = signal<boolean>(false);
   errorMessage = signal<string>('');
-  allproducts = signal<any>([])
+  
   constructor() {
     effect(() => {
       this.getProductImages();

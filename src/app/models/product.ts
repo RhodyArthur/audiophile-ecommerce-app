@@ -7,6 +7,10 @@ export interface Product {
   price: number;
   description: string;
   features: string;
+  product_gallery: ProductGallery[];
+  product_images: ProductImageSet[];
+  product_includes: IncludedItem[];
+
 }
 
 export interface ProductImageSet {
@@ -38,4 +42,5 @@ export interface RelatedProduct {
   image_mobile: string;
   image_tablet: string;
   image_desktop: string;
+  name: string;
 }

@@ -3,7 +3,7 @@
         <app-spinner/>
     }
     <div class="image-container">
-        @for (productImage of productImages(); track $index) {
+        @for (productImage of productImages(); track productImage.id) {
             @if (productImage.product_id === productId()) {
                 <picture>
                     <source media="(min-width: 1440px)" [srcset]="productImage.desktop_url">

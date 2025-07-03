@@ -1,0 +1,103 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+main
+    @include flex-container(flex, center, flex-start, column)
+    gap: 2rem
+
+    .image-container
+        picture
+            img
+                width: 100%
+                height: pxToRem(327)
+                border-radius: 0.5rem
+
+    section, .name-container, .description-price
+        @include flex-container(flex, center, flex-start, column)
+        gap: 1.5rem
+
+        .name-container
+            text-transform: uppercase
+
+            h4
+                color: $primary-orange
+                @extend .overline
+                font-weight: 400
+                letter-spacing: 10px
+
+            h1
+                @extend .h4-manrope-bold
+
+        .description-price
+            p
+                @extend .body-medium
+                color: $black
+                opacity: 0.5
+
+            span
+                @extend .h6-manrope-bold
+
+        .button-container
+            @include flex-container(flex, space-between, flex-start, row)
+            gap: 1rem
+
+
+@include mq(tablet)
+    main
+        @include flex-container(flex, space-between, center, row)
+        gap: pxToRem(69)
+
+
+        .image-container
+            width:100%
+            height: pxToRem(480)
+
+            picture
+                img
+                    width: 100%
+                    height: 100%
+
+        section
+            gap: 2rem
+
+            .name-container
+                gap: 1rem
+
+                h1
+                    font-size: 2.5rem
+
+            .description-price
+                gap: 2rem
+
+@media (min-width: 1024px)
+    main
+        width: 100%
+
+        .image-container
+            width: 100%
+            height: 100%
+
+@include mq(desktop)
+    main
+        justify-content: space-between
+        flex-direction: row
+        gap: pxToRem(125)
+
+        .image-container
+            width: pxToRem(540) 
+            height: pxToRem(560)
+
+
+        section
+            width: pxToRem(445)
+
+            .name-container, .description-price
+                align-items: flex-start
+                justify-content: flex-start
+                text-align: left
+
+            .button-container
+                margin-top: 1rem
+
