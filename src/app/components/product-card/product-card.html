@@ -1,6 +1,6 @@
 <main>
     @if (isLoading()) {
-        <p>loading...</p>
+        <app-spinner/>
     }
     <div class="image-container">
         @for (productImage of productImages(); track $index) {

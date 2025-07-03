@@ -19,18 +19,23 @@ export interface ProductImageSet {
 }
 
 export interface IncludedItem {
+  product_id: number;
   quantity: number;
   item: string;
 }
 
 export interface ProductGallery {
-  first: ProductImageSet;
-  second: ProductImageSet;
-  third: ProductImageSet;
+  product_id: number;
+  position: string;
+  mobile_url: string;
+  tablet_url: string;
+  desktop_url: string;
 }
 
 export interface RelatedProduct {
-  slug: string;
-  name: string;
-  image: ProductImageSet;
+  product_id: number;
+  related_product_id: number;
+  image_mobile: string;
+  image_tablet: string;
+  image_desktop: string;
 }

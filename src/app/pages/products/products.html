@@ -2,7 +2,7 @@
     <header>{{category()}}</header>
 
     @if (isLoading()) {
-        <p>loading...</p>
+        <app-spinner/>
     }
     <div class="product-list">
         @for (product of products(); track $index) {

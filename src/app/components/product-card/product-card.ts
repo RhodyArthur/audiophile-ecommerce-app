@@ -1,12 +1,13 @@
-import { Component, effect, inject, input, output, signal } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { Button } from "../../shared/button/button";
 import { Product, ProductImageSet } from '../../models/product';
 import { ProductsService } from '../../services/products-service';
 import { Router } from '@angular/router';
+import { Spinner } from "../../shared/spinner/spinner";
 
 @Component({
   selector: 'app-product-card',
-  imports: [Button],
+  imports: [Button, Spinner],
   templateUrl: './product-card.html',
   styleUrl: './product-card.sass'
 })
@@ -18,10 +19,9 @@ export class ProductCard {
   productId = signal<number>(0);
   isLoading = signal<boolean>(false);
   errorMessage = signal<string>('');
-
+  allproducts = signal<any>([])
   constructor() {
     effect(() => {
-
       this.getProductImages();
     }) 
   }
@@ -43,7 +43,6 @@ export class ProductCard {
       this.isLoading.set(false);
     }
   }
-
 
   handleButtonClicked(id: number) {
     this.router.navigate(['product-details', id])
