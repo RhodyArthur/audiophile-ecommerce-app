@@ -1,6 +1,8 @@
-import { Component, input } from '@angular/core';
+import { Component, effect, inject, input } from '@angular/core';
 import { Button } from "../../shared/button/button";
 import { RelatedProduct } from '../../models/product';
+import { ProductsService } from '../../services/products-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-related-product-card',
@@ -10,4 +12,11 @@ import { RelatedProduct } from '../../models/product';
 })
 export class RelatedProductCard {
   relatedProduct = input<RelatedProduct>()
+  private router = inject(Router);
+
+
+  navigateToDetails(id: number) {
+    this.router.navigate(['product-details', id])
+  }
+
 }

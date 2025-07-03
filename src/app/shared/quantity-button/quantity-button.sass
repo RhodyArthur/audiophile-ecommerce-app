@@ -1,0 +1,25 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+.container
+    @include flex-container(flex, null, center, row)
+    gap: 1.20rem
+    padding: pxToRem(15) 0.75rem
+    background-color: $light-grey
+
+    span, p
+        padding-inline: pxToRem(6)
+        @extend .sub-title
+        cursor: pointer
+
+    span
+        color: $black
+        opacity: 0.6
+
+        &:hover, &.active
+            color: $primary-orange
+            opacity: 1
+
+

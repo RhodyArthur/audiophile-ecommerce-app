@@ -7,5 +7,5 @@
 
     <h2>{{relatedProduct()?.name}}</h2>
 
-    <app-button/>
+    <app-button (click)="navigateToDetails(relatedProduct()!.related_product_id)"/>
 </main>
