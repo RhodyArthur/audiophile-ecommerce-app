@@ -45,7 +45,6 @@ export class ProductDetails {
     try {
       const full = await this.productService.fetchProductDetails(id);
       this.productDetails.set(full);
-      // console.log('hello', full)
     } catch (err) {
       console.error('Failed loading product assets', err);
       this.productDetails.set(null);
