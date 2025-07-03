@@ -1,0 +1,40 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+main
+    @include flex-container(flex, null, null, column)
+    gap: pxToRem(120)
+
+    .product
+        @include flex-container(flex, null, null, column)
+        gap: 1.5rem
+        padding-inline: 1.5rem
+
+        a
+            text-decoration: none
+            cursor: pointer
+            @extend .body-medium
+            color: $black
+            opacity: 0.5
+
+
+@include mq(tablet)
+    main
+        .product
+            padding-inline: 2rem
+@include mq(desktop)
+    main
+        @include flex-container(flex, null, null, column)
+        gap: pxToRem(120)
+
+        .product
+            max-width: pxToRem(1110)
+            margin: auto
+            padding-inline: 0
+        
+        .hero
+            background-color: $black100
+        .footer
+            background-color: $black

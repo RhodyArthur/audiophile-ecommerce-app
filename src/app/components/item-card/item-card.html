@@ -1,0 +1,35 @@
+<main>
+    @if (isLoading()) {
+        <app-spinner/>
+    }
+    <div class="image-container">
+        @for (productImage of product()?.product_images; track productImage.id) {
+            <picture>
+                <source media="(min-width: 1440px)" [srcset]="productImage.desktop_url">
+                <source media="(min-width: 768px)" [srcset]="productImage.tablet_url">
+                <img [src]="productImage.mobile_url" [alt]="product()?.category" />
+            </picture>
+        }
+    </div>
+
+    <section>
+        <div class="name-container">
+            @if (product()?.new) {
+    
+                <h4>new product</h4>
+            }
+    
+            <h1>{{product()?.name}}</h1>
+        </div>
+
+        <div class="description-price">
+            <p>{{product()?.description}}</p>
+            <span>{{product()?.price | currency:'USD':'symbol':'1.0-0'}}</span>
+        </div>
+
+        <div class="button-container">
+            <app-button [variant]="'secondary'" [label]="'add to cart'"/>
+            <app-button [label]="'add to cart'"/>
+        </div>
+    </section>
+</main>
