@@ -4,13 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../services/products-service';
 import { Footer } from "../../components/footer/footer";
 import { About } from "../../components/about/about";
-import { HomeProducts } from "../../components/home-products/home-products";
 import { ProductsCategory } from "../../components/products-category/products-category";
 import { ProductCard } from "../../components/product-card/product-card";
+import { Spinner } from "../../shared/spinner/spinner";
 
 @Component({
   selector: 'app-products',
-  imports: [Footer, About, ProductsCategory, ProductCard],
+  imports: [Footer, About, ProductsCategory, ProductCard, Spinner],
   templateUrl: './products.html',
   styleUrl: './products.sass'
 })
