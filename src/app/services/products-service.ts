@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { SupabaseService } from './supabase-service';
-import { Product, ProductImageSet } from '../models/product';
+import { IncludedItem, Product, ProductImageSet } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -56,4 +56,24 @@ export class ProductsService {
 
     return data as ProductImageSet[]
   }
+
+  async fetchProductDetails(id: number) {
+    const { data, error } = await this.supabaseService
+      .getClient()
+      .from('products')
+      .select(`
+        *,
+        product_images (*),
+        product_includes (*),
+        product_gallery (*)
+      `)
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('fetchProductDetails error', error);
+      return null;
+    }
+    return data as Product
+}
 }

@@ -7,6 +7,10 @@ export interface Product {
   price: number;
   description: string;
   features: string;
+  product_gallery: ProductGallery[];
+  product_images: ProductImageSet[];
+  product_includes: IncludedItem[];
+
 }
 
 export interface ProductImageSet {
