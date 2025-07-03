@@ -1,0 +1,44 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+.hidden
+    display: none
+
+header
+    @include flex-container(flex, space-between, center, row)
+    padding: 2rem 1.5rem
+    background-color: $black100
+    color: $white
+    border-bottom: 1px solid $grey
+
+    img
+        cursor: pointer
+
+    nav
+        @extend .sub-title
+
+
+
+@include mq(desktop)
+    header
+        max-width: pxToRem(1110)
+        margin: auto
+        padding-inline: 0
+
+        .menu
+            display: none
+
+        nav
+            @include flex-container(flex, space-between, center, row)
+            gap: pxToRem(34)
+
+            a
+                text-decoration: none
+                cursor: pointer
+                color: $white
+
+                &:hover, &.active
+                    color: $primary-orange
+                    

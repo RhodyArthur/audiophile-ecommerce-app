@@ -1,0 +1,90 @@
+@use '../../../../styles/_breakpoints' as *
+@use '../../../../styles/_mixin' as *
+@use '../../../../styles/_typography' as *
+@use '../../../../styles/_variables' as *
+
+main
+    @include flex-container(flex, center, center, column)
+    gap: 3.5rem
+    height: 100dvh
+    background-color: $off-white
+    position: absolute
+    left: 0
+    right: 0
+    top: 0
+
+    h2
+        color: $primary-orange
+
+    section
+        @include flex-container(flex, center, flex-start, column)
+        gap: 1.5rem
+        background-color: $white
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4)
+        padding: 1.5rem
+        border-radius: 10px
+
+        h1
+            @extend .h3-manrope-bold
+            font-weight: 400
+            color: $primary-orange
+
+        form
+            @include flex-container(flex, center, flex-start, column)
+            gap: 2.5rem
+            width: 100%
+
+            .input-fields
+                @include flex-container(flex, center, flex-start, column)
+                gap: 1.5rem
+                width: 100%
+
+                .input-group
+                    width: 100%
+
+                    input
+                        width: 100%
+                        border: none
+                        outline: none
+                        padding: 1rem
+                        border-bottom: 1px solid $primary-orange
+                        caret-color: $primary-orange
+                        @extend .body-medium
+
+                    small
+                        color: $red
+
+            .btn-container
+                width: 100%
+                @include flex-container(flex, center, center, column)
+                gap: 1.5rem
+                @extend .body-medium
+
+                button
+                    width: 100%
+                    outline: none
+                    border: 2px solid transparent
+                    border-radius: 8px
+                    padding: 0.75rem 1rem
+                    background-color: $primary-orange
+                    color: $white
+                    
+
+                    &:hover
+                        cursor: pointer
+                        background-color: $white
+                        border: 2px solid $primary-orange
+                        color: $primary-orange
+                        font-weight: 600
+
+                p
+                    text-align: center
+                    a
+                        text-decoration: none
+                        cursor: pointer
+                        color: $primary-orange
+
+@include mq(tablet)
+    main
+        section
+            width: pxToRem(400)

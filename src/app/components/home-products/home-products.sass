@@ -1,0 +1,86 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+
+main
+    @include flex-container(flex, center, center, column)
+    gap: 1.5rem
+    padding-inline: 1.5rem
+
+    .speaker-zx7
+        position: relative
+
+        picture
+            position: relative
+            img
+                border-radius: 8px
+
+        
+        .info
+            @include flex-container(flex, null, null, column)
+            gap: 2rem
+            padding-left: 1.5rem
+            position: absolute
+            top: 35%
+
+            h2
+                text-transform: uppercase
+                @extend .h4-manrope-bold
+
+    .yx1-earphones
+        @include flex-container(flex, space-between, null, column)
+        gap: 1.5rem
+
+        img
+            border-radius: 8px
+
+        .card
+            @include flex-container(flex, null, null, column)
+            gap: 2rem
+            padding: pxToRem(41) 1.5rem pxToRem(56)
+            background-color: $light-grey
+            border-radius: 8px
+
+            h2
+                text-transform: uppercase
+
+
+
+@include mq(tablet)
+    main
+        padding-inline: 2.5rem
+
+        .speaker-zx7, .speaker-card
+            width: 100%           
+
+            picture
+                img
+                    width: 100%
+
+            .info
+                padding-left: pxToRem(62)
+
+        .yx1-earphones
+            flex-direction: row
+            width: 100%
+
+            picture
+                width: 50%
+                img
+                    height: pxToRem(320)
+                    width: 100%
+
+            .card
+                width: 50%
+
+@include mq(desktop)
+    main
+        max-width: 1110px
+        margin: auto
+        padding: 0
+
+        .speaker-zx7
+            .info
+                padding-left: pxToRem(95)

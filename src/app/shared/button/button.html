@@ -1,0 +1,9 @@
+<button
+    [class]="['btn', 'btn-' + variant()]"
+    (click)="onButtonClicked()"
+>
+    @if (loading()) {
+        <span>loading</span>
+    }
+    {{label()}}
+</button>

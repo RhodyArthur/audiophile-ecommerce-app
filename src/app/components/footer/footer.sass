@@ -1,0 +1,84 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+footer
+    @include flex-container(flex, center, center, column)
+    gap: pxToRem(48)
+    padding-inline: 1.5rem
+    padding-bottom: pxToRem(38)
+    background-color: $black
+
+    span
+        width: pxToRem(101)
+        height: pxToRem(4)
+        background-color: $primary-orange
+
+    section, .logo-nav, .social-right
+        @include flex-container(flex, center, center, column)
+        gap: pxToRem(48)
+
+        nav
+            @include flex-container(flex, center, center, column)
+            gap: 1rem
+
+            a
+                color: $white
+                text-transform: uppercase
+                cursor: pointer
+                color: $white
+                text-decoration: none
+
+                &:hover
+                    color: $primary-orange
+
+        p
+            color: $grey
+            @extend .body-medium
+            text-align: center
+
+        .socials
+            @include flex-container(flex, center, center, row)
+            gap: 1rem
+
+            img
+                &:hover
+                    cursor: pointer
+                    background-color: $primary-orange
+
+@include mq(tablet)
+    footer
+        align-items: flex-start
+        padding-inline: 2.5rem
+        gap: pxToRem(60)
+        padding-bottom: pxToRem(46)
+
+        section
+            align-items: flex-start
+
+
+            .logo-nav
+                align-items: flex-start
+                gap: 2rem
+
+                nav
+                    flex-direction: row
+            
+            p
+                text-align: left
+
+        .social-right
+            width: 100%
+            flex-direction: row
+            justify-content: space-between
+
+@include mq(desktop)
+    footer
+        max-width: pxToRem(1110)
+        margin: auto
+        padding-inline: 0
+
+        .logo-nav
+            width: 100%
+            @include flex-container(flex, space-between, center, row)

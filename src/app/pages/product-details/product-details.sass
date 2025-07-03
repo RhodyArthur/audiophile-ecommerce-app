@@ -1,0 +1,163 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+main
+    @include flex-container(flex, null, null, column)
+    gap: pxToRem(120)
+
+    section
+        @include flex-container(flex, null, null, column)
+        gap: pxToRem(88)
+        padding-inline: 1.5rem
+        padding-top: 1rem
+
+        .product
+            @include flex-container(flex, null, null, column)
+            gap: 1.5rem
+
+            a
+                text-decoration: none
+                cursor: pointer
+                @extend .body-medium
+                color: $black
+                opacity: 0.5
+
+        .feature-box
+            @include flex-container(flex, flex-start, flex-start, column)
+            gap: pxToRem(88)
+
+            .features, .includes
+                @include flex-container(flex, null, null, column)
+                gap: 1.5rem
+
+                h3
+                    @extend .h5-manrope-bold
+                    text-transform: uppercase
+
+                p
+                    @extend .body-medium
+                    color: $black
+                    opacity: 0.5
+                    line-height: 25px
+
+            .includes
+
+                .item-box
+                    @include flex-container(flex, null, null, column)
+                    gap: 0.5rem
+
+                    .item
+                        @include flex-container(flex, flex-start, center, row)
+                        gap: 1.5rem
+                        @extend .body-medium
+
+                        span
+                            color: $primary-orange
+                            font-weight: 600
+
+        .gallery
+            @include flex-container(flex, null, null, column)
+            gap: 1.25rem
+
+            picture
+                img
+                    border-radius: 8px
+
+        .related-products
+            @include flex-container(flex, null, center, column)
+            gap: 2.5rem
+
+            h3
+                text-transform: uppercase
+                @extend .h5-manrope-bold
+
+
+            .related-products-container
+                @include flex-container(flex, null, null, column)
+                gap: pxToRem(56)
+
+
+                
+
+
+
+@include mq(tablet)
+    main
+        section
+            padding-inline: 2rem
+
+            .feature-box
+                .features
+                    gap: 2rem
+
+                    h3
+                        font-size: 2rem
+
+                .includes
+                    gap: pxToRem(11)
+                    flex-direction: row
+
+
+                    h3
+                        width: pxToRem(339)
+
+            .gallery
+                display: grid
+                grid-template-columns: repeat(5, 1fr)
+                grid-template-rows: repeat(2, 1fr)
+                gap: 1.125rem
+
+                picture
+                    img
+                        width: 100%
+                        height: 100%
+
+                picture:nth-child(1)
+                    grid-column: 1 / span 2
+
+                picture:nth-child(2)
+                    grid-row-start: 2
+                    grid-column: 1 / span 2
+
+                picture:nth-child(3)
+                    grid-row: 1 / span 2
+                    grid-column: 3 / span 3
+
+                    img
+                        height: 100%
+
+            .related-products
+                .related-products-container
+                    flex-direction: row
+                    height: 100%
+
+
+
+
+@include mq(desktop)
+    main
+        @include flex-container(flex, null, null, column)
+        gap: pxToRem(120)
+
+        section
+            max-width: pxToRem(1110)
+            margin: auto
+            padding-inline: 0
+
+
+            .feature-box
+                flex-direction: row
+                gap: pxToRem(125)
+
+                .includes
+                    flex-direction: column
+
+                    .features
+                        width: pxToRem(635)
+            
+        .hero
+            background-color: $black100
+        .footer
+            background-color: $black

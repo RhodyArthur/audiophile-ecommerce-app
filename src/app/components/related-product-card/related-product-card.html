@@ -1,0 +1,11 @@
+<main>
+    <picture>
+        <source media="(min-width: 1440px)" [srcset]="relatedProduct()?.image_desktop">
+        <source media="(min-width: 768px)" [srcset]="relatedProduct()?.image_tablet">
+        <img [src]="relatedProduct()?.image_mobile" [alt]="relatedProduct()?.name" />
+    </picture>
+
+    <h2>{{relatedProduct()?.name}}</h2>
+
+    <app-button (click)="navigateToDetails(relatedProduct()!.related_product_id)"/>
+</main>

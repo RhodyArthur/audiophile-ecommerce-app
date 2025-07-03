@@ -1,0 +1,48 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+.btn
+    @extend .sub-title
+    padding: 1rem 2rem
+    font-weight: 400
+    text-transform: uppercase
+    cursor: pointer
+    border: 1px solid transparent
+    outline: none
+
+
+.btn-primary
+    background-color: $primary-orange
+    color: $white
+
+    &:hover
+        background-color: $primary-peach
+
+.btn-primary-login
+    background-color: $primary-orange
+    color: $white
+    border-radius: 8px
+
+    &:hover
+        background-color: $primary-peach
+
+.btn-secondary
+    background-color: transparent
+    color: $black
+    border: 2px solid $black
+
+    &:hover
+        background-color: $black
+        color: $white
+
+.btn-accent
+    background-color: $black
+    color: $white
+
+    &:hover
+        background-color: #4c4c4c
+        color: $white
+
+

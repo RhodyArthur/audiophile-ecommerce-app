@@ -1,0 +1,33 @@
+<main>
+    @if (isLoading()) {
+        <app-spinner/>
+    }
+    <div class="image-container">
+        @for (productImage of productImages(); track productImage.id) {
+            @if (productImage.product_id === productId()) {
+                <picture>
+                    <source media="(min-width: 1440px)" [srcset]="productImage.desktop_url">
+                    <source media="(min-width: 768px)" [srcset]="productImage.tablet_url">
+                    <img [src]="productImage.mobile_url" [alt]="product()?.category" />
+                </picture>
+            }
+        }
+    </div>
+
+    <section>
+        <div class="name-container">
+            @if (product()?.new) {
+    
+                <h4>new product</h4>
+            }
+    
+            <h1>{{product()?.name}}</h1>
+        </div>
+
+        <div class="description-button">
+            <p>{{product()?.description}}</p>
+    
+            <app-button [id]="productId()" (buttonClicked)="handleButtonClicked($event)"></app-button>
+        </div>
+    </section>
+</main>

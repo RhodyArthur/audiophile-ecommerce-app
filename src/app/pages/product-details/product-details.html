@@ -1,0 +1,62 @@
+<main>
+    @if (isLoading()) {
+        <app-spinner/>
+    }
+
+    <section>
+
+        <div class="product">
+            <a (click)="goBack()">Go Back</a>
+    
+            <app-item-card [product]="productDetails()"/>
+        </div>
+
+        <div class="feature-box">
+
+            <div class="features">
+                <h3>features</h3>
+                <p>{{productDetails()?.features}}</p>
+            </div>
+    
+            <div class="includes">
+                <h3>in the box</h3>
+    
+                <div class="item-box">
+    
+                    @for (item of productDetails()?.product_includes; track $index) {
+                        <div class="item">
+                            <span>{{item.quantity}}x</span>
+                            <p>{{item.item}}</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery">
+            @for (image of productDetails()?.product_gallery; track $index) {
+                <picture>
+                    <source media="(min-width: 1440px)" [srcset]="image.desktop_url">
+                    <source media="(min-width: 768px)" [srcset]="image.tablet_url">
+                    <img [src]="image.mobile_url" [alt]="productDetails()?.category" />
+                </picture>
+            }
+        </div>
+
+        <div class="related-products">
+            <h3>you may also like</h3>
+
+            <div class="related-products-container">
+                @for (relatedProduct of relatedProducts(); track $index) {
+                    <app-related-product-card [relatedProduct]="relatedProduct"/>
+                }
+            </div>
+        </div>
+
+    </section>
+    <app-products-category/>
+    <app-about/>
+    <div class="footer">
+        <app-footer/>
+    </div>
+</main>

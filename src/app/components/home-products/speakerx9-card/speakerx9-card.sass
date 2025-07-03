@@ -1,0 +1,82 @@
+@use '../../../../styles/_mixin' as *
+@use '../../../../styles/_breakpoints' as *
+@use '../../../../styles/_variables' as *
+@use '../../../../styles/_typography' as *
+
+img
+    display: block
+    max-width: 100%
+    height: auto
+    object-fit: cover
+
+
+section
+    @include flex-container(flex, null, null, column)  
+    gap: 2rem
+    background-color: $primary-orange
+    border-radius: 8px
+    position: relative
+    
+
+    .circle
+        position: absolute
+
+    .col
+        @include flex-container(flex, null, center, column)  
+        gap: 4rem
+        padding: pxToRem(55) 1.5rem
+        position: relative
+
+
+        picture
+            img
+                width: pxToRem(172.25)
+                height: pxToRem(207)
+        
+        .info
+            @include flex-container(flex, center, center, column)
+            gap: 1.5rem
+            text-align: center
+            color: $white
+
+            h2
+                @extend .h1-manrope-bold
+                text-transform: uppercase
+                letter-spacing: 1.29px  
+                line-height: 1
+
+            p
+                @extend .body-medium
+                font-weight: 300
+
+@include mq(tablet)
+    section
+        width: 100%
+        .col
+            padding: 4rem pxToRem(171)
+            picture
+                img
+                    width: pxToRem(197.21)
+                    height: pxToRem(237)
+
+    
+
+
+@include mq(desktop)
+    section
+        .col
+            @include flex-container(flex, space-between, flex-start, row)
+            gap: pxToRem(138)
+            padding-block: 4rem 0
+            padding-inline: pxToRem(171) pxToRem(95)
+            
+            picture
+                img
+                    width: pxToRem(410.23)
+                    height: pxToRem(493)
+
+            .info
+                align-items: flex-start
+                text-align: left
+                width: pxToRem(349)
+                padding-top: 1rem

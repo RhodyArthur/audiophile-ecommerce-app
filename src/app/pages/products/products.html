@@ -1,0 +1,18 @@
+<main>
+    <header>{{category()}}</header>
+
+    @if (isLoading()) {
+        <app-spinner/>
+    }
+    <div class="product-list">
+        @for (product of products(); track product.id) {
+    
+            <app-product-card [product]="product"/>
+        }
+    </div>
+    <app-products-category/>
+    <app-about/>
+    <div class="footer">
+        <app-footer/>
+    </div>
+</main>

@@ -1,0 +1,15 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+main
+    @include flex-container(flex, flex-start, center, column)
+    gap: 2rem
+    text-align: center
+
+
+    h2
+        @extend .h5-manrope-bold
+        text-transform: uppercase
+        

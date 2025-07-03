@@ -1,0 +1,37 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+main, .product-list
+    @include flex-container(flex, null, null, column)
+    gap: pxToRem(120)
+
+    header
+        padding: 2rem pxToRem(84)
+        text-align: center
+        text-transform: uppercase
+        background-color: $black100
+        color: $white
+        @extend .h4-manrope-bold
+
+    .product-list
+        padding-inline: 1.5rem
+
+@include mq(tablet)
+    main
+        header 
+            padding: pxToRem(97) pxToRem(84)
+
+        .product-list
+            padding-inline: 2.5rem
+
+@include mq(desktop)
+    main
+        .product-list
+            max-width: pxToRem(1110)
+            margin: auto
+            padding-inline: 0
+
+    .footer
+        background-color: $black
