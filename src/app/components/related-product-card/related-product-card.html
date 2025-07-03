@@ -1,1 +1,11 @@
-<p>related-product-card works!</p>
+<main>
+    <picture>
+        <source media="(min-width: 1440px)" [srcset]="relatedProduct()?.image_desktop">
+        <source media="(min-width: 768px)" [srcset]="relatedProduct()?.image_tablet">
+        <img [src]="relatedProduct()?.image_mobile" alt="related product" />
+    </picture>
+
+    <h2>{{relatedProduct()?.name}}</h2>
+
+    <app-button/>
+</main>

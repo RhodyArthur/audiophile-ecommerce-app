@@ -65,6 +65,19 @@ main
                 img
                     border-radius: 8px
 
+        .related-products
+            @include flex-container(flex, null, center, column)
+            gap: 2.5rem
+
+            h3
+                text-transform: uppercase
+                @extend .h5-manrope-bold
+
+
+            .related-products-container
+                @include flex-container(flex, null, null, column)
+                gap: pxToRem(56)
+
 
                 
 
@@ -115,6 +128,10 @@ main
                     img
                         height: 100%
 
+            .related-products
+                .related-products-container
+                    flex-direction: row
+                    height: 100%
 
 
 
@@ -140,7 +157,7 @@ main
                     .features
                         width: pxToRem(635)
             
-            .hero
-                background-color: $black100
-            .footer
-                background-color: $black
+        .hero
+            background-color: $black100
+        .footer
+            background-color: $black

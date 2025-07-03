@@ -42,4 +42,5 @@ export interface RelatedProduct {
   image_mobile: string;
   image_tablet: string;
   image_desktop: string;
+  name: string;
 }

@@ -46,7 +46,11 @@
         <div class="related-products">
             <h3>you may also like</h3>
 
-            
+            <div class="related-products-container">
+                @for (relatedProduct of relatedProducts(); track $index) {
+                    <app-related-product-card [relatedProduct]="relatedProduct"/>
+                }
+            </div>
         </div>
 
     </section>
