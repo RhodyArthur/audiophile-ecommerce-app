@@ -6,10 +6,12 @@ import { ProductsCategory } from "../../components/products-category/products-ca
 import { About } from "../../components/about/about";
 import { Footer } from "../../components/footer/footer";
 import { ItemCard } from "../../components/item-card/item-card";
+import { Location } from '@angular/common';
+import { Spinner } from "../../shared/spinner/spinner";
 
 @Component({
   selector: 'app-product-details',
-  imports: [ProductsCategory, About, Footer, ItemCard],
+  imports: [ProductsCategory, About, Footer, ItemCard, Spinner],
   templateUrl: './product-details.html',
   styleUrl: './product-details.sass'
 })
@@ -17,8 +19,10 @@ export class ProductDetails {
 
   private productService = inject(ProductsService);
   private route = inject(ActivatedRoute);
+  private location = inject(Location);
   productDetails = signal<Product | null>(null);
   productId = signal<number>(0);
+  isLoading = signal<boolean>(false);
   
 
   constructor() {
@@ -36,6 +40,8 @@ export class ProductDetails {
   }
 
   private async loadFullProduct(id: number) {
+    this.isLoading.set(true);
+
     try {
       const full = await this.productService.fetchProductDetails(id);
       this.productDetails.set(full);
@@ -44,5 +50,12 @@ export class ProductDetails {
       console.error('Failed loading product assets', err);
       this.productDetails.set(null);
     }
+    finally {
+      this.isLoading.set(false);
+    }
+  }
+
+  goBack() {
+    this.location.back()
   }
 }

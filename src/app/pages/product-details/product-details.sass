@@ -7,34 +7,77 @@ main
     @include flex-container(flex, null, null, column)
     gap: pxToRem(120)
 
-    .product
+    section
         @include flex-container(flex, null, null, column)
-        gap: 1.5rem
+        gap: pxToRem(88)
         padding-inline: 1.5rem
+        padding-top: 1rem
 
-        a
-            text-decoration: none
-            cursor: pointer
-            @extend .body-medium
-            color: $black
-            opacity: 0.5
+        .product
+            @include flex-container(flex, null, null, column)
+            gap: 1.5rem
+
+            a
+                text-decoration: none
+                cursor: pointer
+                @extend .body-medium
+                color: $black
+                opacity: 0.5
+
+        .features, .includes
+            @include flex-container(flex, null, null, column)
+            gap: 1.5rem
+
+            h3
+                @extend .h5-manrope-bold
+                text-transform: uppercase
+
+            p
+                @extend .body-medium
+                color: $black
+                opacity: 0.5
+                line-height: 25px
+
+        .includes
+
+            .item-box
+                @include flex-container(flex, null, null, column)
+                gap: 0.5rem
+
+                .item
+                    @include flex-container(flex, flex-start, center, row)
+                    gap: 1.5rem
+                    @extend .body-medium
+
+                    span
+                        color: $primary-orange
+                        font-weight: 600
+
+
+                
+
 
 
 @include mq(tablet)
     main
-        .product
+        section
             padding-inline: 2rem
+            .product
+
 @include mq(desktop)
     main
         @include flex-container(flex, null, null, column)
         gap: pxToRem(120)
 
-        .product
+        section
             max-width: pxToRem(1110)
             margin: auto
             padding-inline: 0
-        
-        .hero
-            background-color: $black100
-        .footer
-            background-color: $black
+
+
+            .product
+            
+            .hero
+                background-color: $black100
+            .footer
+                background-color: $black

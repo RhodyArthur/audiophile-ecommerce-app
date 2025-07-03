@@ -1,9 +1,36 @@
 <main>
-    <div class="product">
-        <a>Go Back</a>
+    @if (isLoading()) {
+        <app-spinner/>
+    }
 
-        <app-item-card [product]="productDetails()"/>
-    </div>
+    <section>
+
+        <div class="product">
+            <a (click)="goBack()">Go Back</a>
+    
+            <app-item-card [product]="productDetails()"/>
+        </div>
+
+        <div class="features">
+            <h3>features</h3>
+            <p>{{productDetails()?.features}}</p>
+        </div>
+
+        <div class="includes">
+            <h3>in the box</h3>
+
+            <div class="item-box">
+
+                @for (item of productDetails()?.product_includes; track productDetails()?.id) {
+                    <div class="item">
+                        <span>{{item.quantity}}x</span>
+                        <p>{{item.item}}</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </section>
     <app-products-category/>
     <app-about/>
     <div class="footer">
