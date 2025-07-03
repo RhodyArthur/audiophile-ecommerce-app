@@ -1,7 +1,7 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { ProductsService } from '../../services/products-service';
 import { Product, RelatedProduct } from '../../models/product';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { ProductsCategory } from "../../components/products-category/products-category";
 import { About } from "../../components/about/about";
 import { Footer } from "../../components/footer/footer";
@@ -20,6 +20,7 @@ export class ProductDetails {
 
   private productService = inject(ProductsService);
   private route = inject(ActivatedRoute);
+  private router = inject(Router)
   private location = inject(Location);
   productDetails = signal<Product | null>(null);
   relatedProducts = signal<RelatedProduct[]>([]);

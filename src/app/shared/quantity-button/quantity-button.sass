@@ -4,13 +4,13 @@
 @use '../../../styles/_typography' as *
 
 .container
-    @include flex-container(flex, null, center, row)
+    @include flex-container(flex, center, center, row)
     gap: 1.20rem
-    padding: pxToRem(15) 0.75rem
+    width: pxToRem(120)
+    height: pxToRem(48)
     background-color: $light-grey
 
     span, p
-        padding-inline: pxToRem(6)
         @extend .sub-title
         cursor: pointer
 

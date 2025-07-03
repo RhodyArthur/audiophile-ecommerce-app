@@ -15,4 +15,5 @@ export class ItemCard {
  product = input<Product | null>();
  isLoading = signal<boolean>(false);
  errorMessage = signal<string>('');
+
 }

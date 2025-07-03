@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
-import { Footer } from './components/footer/footer';
 
 export const routes: Routes = [
     {path: '', component: Home},
@@ -19,7 +18,9 @@ export const routes: Routes = [
     },
     {
         path: 'product-details/:id',
-        loadComponent: () => import('./pages/product-details/product-details').then(m => m.ProductDetails)
+        loadComponent: () => import('./pages/product-details/product-details').then(m => m.ProductDetails),
     },
-    {path: '**', component: Footer}
+  
+    
+    {path: '**', redirectTo: ''}
 ];
