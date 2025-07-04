@@ -8,7 +8,13 @@
         <a routerLinkActive="active" [routerLink]="['/product', 'headphones']" [routerLinkActiveOptions]="{ exact: true }">HEADPHONES</a>
         <a routerLinkActive="active" [routerLink]="['/product', 'speakers']" [routerLinkActiveOptions]="{ exact: true }">SPEAKERS</a>
         <a routerLinkActive="active" [routerLink]="['/product', 'earphones']" [routerLinkActiveOptions]="{ exact: true }">EARPHONES</a>
-        <a routerLink="login">LOGIN</a>
+        @if (authService.currentUser()) {
+            <a>PROFILE</a>
+        }
+        @else {
+
+            <a routerLink="login">LOGIN</a>
+        }
     </nav>
 
     <img src="/assets/icons/cart.svg" alt="cart icon">
