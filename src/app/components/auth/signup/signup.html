@@ -63,7 +63,15 @@
 
             <div class="btn-container">
 
-                <button type="submit" [disabled]="signupForm.invalid">Create an account</button>
+                <button type="submit" [disabled]="signupForm.invalid">
+                    @if (isLoading()) {
+                        loading...
+                    }
+                    @else {
+
+                        Create an account
+                    }
+                </button>
 
                 <p>Don't have an account?
                     <a routerLink="/login" routerLinkActive="active" aria-label="Sign up">Login</a>
