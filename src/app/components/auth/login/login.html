@@ -31,7 +31,14 @@
 
             <div class="btn-container">
 
-                <button type="submit" [disabled]="!loginFom.valid">Log in to your account</button>
+                <button type="submit" [disabled]="!loginFom.valid">
+                    @if (isLoading()) {
+                        loading...
+                    }
+                    @else {   
+                        Log in to your account
+                    }
+                </button>
 
                 <p>Don't have an account?
                     <a routerLink="/signup" routerLinkActive="active" aria-label="Sign up">Sign Up</a>

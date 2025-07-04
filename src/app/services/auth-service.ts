@@ -29,4 +29,17 @@ export class AuthService {
   }
 
 
+  async logIn(email: string, password: string) {
+    const { data, error } = await this.supabaseService
+    .getClient()
+    .auth.signInWithPassword({
+      email,
+      password
+    });
+
+    if (error) throw error;
+    return data;
+  }
+
+
 }
