@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { passwordMatchValidator } from '../../../shared/validators/passwordMatch';
 import { passwordStructureValidator } from '../../../shared/validators/passwordStructure';
+import { AuthService } from '../../../services/auth-service';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +14,10 @@ import { passwordStructureValidator } from '../../../shared/validators/passwordS
 export class Signup {
 
   private fb = inject(FormBuilder);
-  private router = inject(Router)
+  private router = inject(Router);
+  private authService = inject(AuthService);
+  errorMessage = signal<string>('');
+  isLoading = signal<boolean>(false);
 
   signupForm: FormGroup = this.fb.group({
     fullName: ['', [Validators.required, Validators.minLength(3)]],
@@ -22,14 +26,25 @@ export class Signup {
     repeatPassword: ['', Validators.required]
   }, {validators: passwordMatchValidator})
 
-  submit() {
-    if(this.signupForm.valid) {
-      const {fullName, email, password} = this.signupForm.value
-      console.log(fullName, email, password)
-      this.router.navigate(['login'])
+  async submit() {
+  if(this.signupForm.valid) {
+    const { fullName, email, password } = this.signupForm.value;
+    this.isLoading.set(true);
+    try {
+      const data = await this.authService.signUp(email, password, fullName);
+      this.router.navigate(['login']);
+      this.clearForm();
     }
-    this.clearForm()
+    catch(err) {
+      this.errorMessage.set('Failed to create an account');
+      console.error('Signup error caught in component:', err);
+    }
+    finally {
+      this.isLoading.set(false);
+    }
   }
+}
+
   
   clearForm() {
     this.signupForm.reset()
