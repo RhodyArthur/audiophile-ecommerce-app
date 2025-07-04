@@ -3,6 +3,9 @@
     
     <section>
         <h1>Sign up</h1>
+        @if(errorMessage()) {
+            <p class="error">{{errorMessage()}}</p>
+        }
         
         <form [formGroup]="signupForm" (ngSubmit)="submit()">
 

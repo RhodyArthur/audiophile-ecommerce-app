@@ -1,5 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { SupabaseService } from './supabase-service';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,26 @@ import { SupabaseService } from './supabase-service';
 export class AuthService {
 
   private supabaseService = inject(SupabaseService);
+
+  currentUser = signal<Partial <User> | null>(null);
+
+  constructor() {
+    this.supabaseService.getClient()
+    .auth.getUser().then(({ data, error }) => {
+      if (!error) {
+        this.currentUser.set(data.user);
+      }
+    });
+
+    this.supabaseService.getClient()
+    .auth.onAuthStateChange((event, session) => {
+      this.currentUser.set(session?.user ?? null);
+    });
+  }
+
+  isLoggedIn() {
+    return this.currentUser() !== null;
+  }
 
   async signUp(email: string, password: string, fullName: string) {
     const { data, error } = await this.supabaseService
@@ -17,7 +38,8 @@ export class AuthService {
       options: {
         data: {
           full_name: fullName
-        }
+        },
+        emailRedirectTo: 'https://audiophile-ecommerce-app-self.vercel.app/login'
       }
     });
 
