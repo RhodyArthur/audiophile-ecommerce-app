@@ -35,9 +35,13 @@ export class Signup {
       this.router.navigate(['login']);
       this.clearForm();
     }
-    catch(err) {
-      this.errorMessage.set('Failed to create an account');
+    catch(err: any) {
       console.error('Signup error caught in component:', err);
+      if (err?.message?.includes('User already registered')) {
+        this.errorMessage.set('This email is already registered.');
+      } else {
+        this.errorMessage.set('Failed to create an account.');
+      }
     }
     finally {
       this.isLoading.set(false);

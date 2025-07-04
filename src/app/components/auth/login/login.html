@@ -3,7 +3,9 @@
     
     <section>
         <h1>Login</h1>
-        
+        @if(errorMessage()) {
+            <p class="error">{{errorMessage()}}</p>
+        }
         <form [formGroup]="loginFom" (ngSubmit)="submit()">
 
             <div class="input-fields">
