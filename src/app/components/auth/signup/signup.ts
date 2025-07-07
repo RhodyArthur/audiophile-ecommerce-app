@@ -31,7 +31,7 @@ export class Signup {
     const { fullName, email, password } = this.signupForm.value;
     this.isLoading.set(true);
     try {
-      const data = await this.authService.signUp(email, password, fullName);
+      await this.authService.signUp(email, password, fullName);
       this.router.navigate(['login']);
       this.clearForm();
     }

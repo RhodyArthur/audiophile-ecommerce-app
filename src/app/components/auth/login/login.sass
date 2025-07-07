@@ -51,6 +51,15 @@ main
                         caret-color: $primary-orange
                         @extend .body-medium
 
+                    a
+                        @include flex-container(flex, flex-end, null, row)
+                        text-decoration: none
+                        cursor: pointer
+                        color: $primary-orange
+                        @extend .body-medium
+                        margin-top: 0.25rem
+                        
+
                     small
                         color: $red
 
