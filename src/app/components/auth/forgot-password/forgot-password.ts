@@ -24,7 +24,8 @@ export class ForgotPassword {
     if (this.form.valid) {
       this.isLoading.set(true);
       try {
-        await this.authService.sendPasswordResetEmail(this.form.value);
+        const email = this.form.value.email
+        await this.authService.sendPasswordResetEmail(email);
       }
       catch(err) {
         this.errorMessage.set('Failed to send password reset link')
