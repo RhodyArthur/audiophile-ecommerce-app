@@ -28,7 +28,7 @@
                     @if (loginFom.get('password')?.errors?.['required']) {
                         <small class="error">Can't be empty</small>
                     }}
-                    <a>Forgot Password?</a>
+                    <a [routerLink]="['/forgot-password']">Forgot Password?</a>
                 </div>
             </div>
 
