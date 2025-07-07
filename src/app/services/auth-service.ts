@@ -63,5 +63,30 @@ export class AuthService {
     return data;
   }
 
+  async logOut() {
+    const { error } = await this.supabaseService
+    .getClient()
+    .auth
+    .signOut()
 
+    if (error) throw error;
+  }
+
+  async passwordReset(email: string) {
+    const { data, error } = await this.supabaseService
+    .getClient()
+    .auth
+    .resetPasswordForEmail(
+      email,
+      {
+        redirectTo: 'https://audiophile-ecommerce-app-self.vercel.app/password-reset'
+      }
+    )
+
+    if (error) {
+      console.error('Password Reset failed:', error.message);
+      throw error
+    };
+    return data;
+  }
 }
