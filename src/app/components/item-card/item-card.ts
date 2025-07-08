@@ -6,6 +6,7 @@ import { CurrencyPipe } from '@angular/common';
 import { QuantityButton } from "../../shared/quantity-button/quantity-button";
 import { CartService } from '../../services/cart-service';
 import { AuthService } from '../../services/auth-service';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-item-card',
@@ -16,10 +17,9 @@ import { AuthService } from '../../services/auth-service';
 export class ItemCard {
  product = input<Product | null>();
  isLoading = signal<boolean>(false);
- errorMessage = signal<string>('');
- successMessage = signal<string>('');
  private cartService = inject(CartService);
  private authService = inject(AuthService);
+ private hotToastService = inject(HotToastService);
  currentQuantity = signal<number>(1);
  currentUserId = signal<string>('');
 
@@ -33,11 +33,11 @@ export class ItemCard {
   const { id: productId, price, name } = product
 
   if (!this.currentUserId()) {
-    this.errorMessage.set('User not authenticated')
+    this.hotToastService.error('You must be logged in')
   }
 
-  try {
 
+  try {
     await this.cartService.addToCart({
       product_id: productId,
       price,
@@ -45,10 +45,10 @@ export class ItemCard {
       quantity: this.currentQuantity(),
       user_id: this.currentUserId() || 'N/A'
     })
-    this.successMessage.set('Item added to cart successfully');
+    this.hotToastService.success('Item added to cart successfully')
   }
   catch(err: any) {
-    this.errorMessage.set(err.message)
+    this.hotToastService.error(err.message)
   }
   finally {
     this.currentQuantity.set(1)

@@ -2,10 +2,6 @@
     @if (isLoading()) {
         <app-spinner/>
     }
-    @if (errorMessage()) {
-        <small>{{errorMessage()}}</small>
-    }
-   
     <div class="image-container">
         @for (productImage of product()?.product_images; track productImage.id) {
             <picture>

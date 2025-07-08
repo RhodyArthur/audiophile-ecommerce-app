@@ -4,6 +4,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { passwordMatchValidator } from '../../../shared/validators/passwordMatch';
 import { passwordStructureValidator } from '../../../shared/validators/passwordStructure';
 import { AuthService } from '../../../services/auth-service';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-signup',
@@ -16,6 +17,7 @@ export class Signup {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private authService = inject(AuthService);
+  private hotToastService = inject(HotToastService);
   errorMessage = signal<string>('');
   isLoading = signal<boolean>(false);
 
@@ -39,8 +41,10 @@ export class Signup {
       console.error('Signup error caught in component:', err);
       if (err?.message?.includes('User already registered')) {
         this.errorMessage.set('This email is already registered.');
+        this.hotToastService.error(this.errorMessage())
       } else {
         this.errorMessage.set('Failed to create an account.');
+        this.hotToastService.error(this.errorMessage())
       }
     }
     finally {
