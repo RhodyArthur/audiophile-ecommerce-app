@@ -19,6 +19,27 @@ header
     nav
         @extend .sub-title
 
+    .cart
+        position: relative
+        width: 1.5rem
+        height: 1.5rem
+
+        .cart-icon
+            display: block
+
+        span
+            position: absolute
+            top: -7px
+            right: -4px
+            background-color: $primary-orange
+            border-radius: 50%
+            min-width: 1rem
+            min-height: 1rem
+            text-align: center
+            padding: 2px
+            line-height: 1
+            font-size: 0.625rem
+
 
 
 @include mq(desktop)

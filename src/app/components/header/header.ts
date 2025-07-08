@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../services/auth-service';
+import { CartService } from '../../services/cart-service';
 
 @Component({
   selector: 'app-header',
@@ -10,5 +11,16 @@ import { AuthService } from '../../services/auth-service';
 })
 export class Header {
   protected authService = inject(AuthService);
+  protected cartService = inject(CartService);
 
+  constructor() {
+    effect(() =>{
+      this.getUserId()
+      this.cartService.fetchCartCount(this.getUserId())
+    })
+  }
+
+  getUserId(): string {
+    return this.authService.currentUser()?.id!
+  }
 }

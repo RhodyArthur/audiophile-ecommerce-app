@@ -27,14 +27,17 @@ export class Login {
       const {email, password} = this.loginFom.value
       this.isLoading.set(true);
       try {
-        console.log(email, password)
         await this.authService.logIn(email, password);
         this.router.navigate(['/'])
         this.clearForm();
       }
-      catch(err) {
-        this.errorMessage.set('Failed to log in');
+      catch(err: any) {
         console.error('Login error caught in component:', err);
+        if (err?.message?.includes('Email not confirmed')) {
+        this.errorMessage.set('Check your mail to confirm your email');
+        } else {
+          this.errorMessage.set('Failed to log in.');
+        }
       }
       finally {
         this.isLoading.set(false);
