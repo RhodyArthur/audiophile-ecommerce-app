@@ -54,4 +54,16 @@ export class CartService {
     // Update local cart count reactively
     this.cartCount.update(count => count + item.quantity!);
   }
+
+    async fetchCartCount(userId: string) {
+    const { count, error } = await this.supabase
+      .getClient()
+      .from('cart')
+      .select('*', { count: 'exact', head: true })
+      .eq('user_id', userId);
+
+    if (!error && count !== null) {
+      this.cartCount.set(count);
+    }
+  }
 }
