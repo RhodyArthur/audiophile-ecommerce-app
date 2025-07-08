@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 
 @Component({
   selector: 'app-quantity-button',
@@ -8,12 +8,23 @@ import { Component, signal } from '@angular/core';
 })
 export class QuantityButton {
   quantity = signal<number>(1);
-
+  quantityChanged = output<number>();
+  
   decreaseQuantity(): void {
-    this.quantity.update(q => Math.max(1, q - 1));
+    this.quantity.update(q => {
+      const newQuantity = Math.max(1, q - 1);
+      this.quantityChanged.emit(newQuantity);
+      return newQuantity;
+    });
   }
 
   increaseQuantity(): void {
-    this.quantity.update(q => q + 1)
+    this.quantity.update(q => {
+      const newQuantity = q + 1
+      this.quantityChanged.emit(newQuantity)
+      return newQuantity
+    })
   }
+
+  
 }

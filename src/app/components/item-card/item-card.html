@@ -2,6 +2,9 @@
     @if (isLoading()) {
         <app-spinner/>
     }
+    @if (errorMessage()) {
+        <small>{{errorMessage()}}</small>
+    }
     <div class="image-container">
         @for (productImage of product()?.product_images; track productImage.id) {
             <picture>
@@ -28,8 +31,8 @@
         </div>
 
         <div class="button-container">
-            <app-quantity-button/>
-            <app-button [label]="'add to cart'"/>
+            <app-quantity-button (quantityChanged)="onQuantityChanged($event)"/>
+            <app-button [label]="'add to cart'" (click)="addItemtoCart(product()!)"/>
         </div>
     </section>
 </main>

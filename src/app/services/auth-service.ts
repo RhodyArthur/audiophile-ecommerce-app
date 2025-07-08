@@ -59,7 +59,10 @@ export class AuthService {
       password
     });
 
-    if (error) throw error;
+    if (error) {
+      console.error('Login failed:', error.message);
+      throw error
+    };
     return data;
   }
 
