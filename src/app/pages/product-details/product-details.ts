@@ -1,7 +1,7 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { ProductsService } from '../../services/products-service';
 import { Product, RelatedProduct } from '../../models/product';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ProductsCategory } from "../../components/products-category/products-category";
 import { About } from "../../components/about/about";
 import { Footer } from "../../components/footer/footer";
@@ -9,6 +9,7 @@ import { ItemCard } from "../../components/item-card/item-card";
 import { Location } from '@angular/common';
 import { Spinner } from "../../shared/spinner/spinner";
 import { RelatedProductCard } from "../../components/related-product-card/related-product-card";
+import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-product-details',
@@ -20,8 +21,8 @@ export class ProductDetails {
 
   private productService = inject(ProductsService);
   private route = inject(ActivatedRoute);
-  private router = inject(Router)
   private location = inject(Location);
+  private hotToastService = inject(HotToastService);
   productDetails = signal<Product | null>(null);
   relatedProducts = signal<RelatedProduct[]>([]);
   productId = signal<number>(0);
@@ -51,6 +52,7 @@ export class ProductDetails {
       this.productDetails.set(full);
     } catch (err) {
       console.error('Failed loading product assets', err);
+      this.hotToastService.error('Failed loading product assets')
       this.productDetails.set(null);
     }
     finally {
@@ -65,7 +67,8 @@ export class ProductDetails {
       const full = await this.productService.fetchRelatedProductsById(id);
       this.relatedProducts.set(full);
     } catch (err) {
-      console.error('Failed loading product assets', err);
+      console.error('Failed loading related product assets', err);
+      this.hotToastService.error('Failed loading related product assets')
       this.relatedProducts.set([]);
     }
     finally {

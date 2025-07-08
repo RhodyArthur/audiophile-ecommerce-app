@@ -7,6 +7,7 @@ import { About } from "../../components/about/about";
 import { ProductsCategory } from "../../components/products-category/products-category";
 import { ProductCard } from "../../components/product-card/product-card";
 import { Spinner } from "../../shared/spinner/spinner";
+import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-products',
@@ -19,6 +20,7 @@ export class Products implements OnInit {
   category = signal<string>('');
   private productsService = inject(ProductsService);
   private route = inject(ActivatedRoute);
+  private hotToastService = inject(HotToastService);
   isLoading = signal<boolean>(false);
   errorMessage = signal<string>('');
 
@@ -44,7 +46,8 @@ export class Products implements OnInit {
     }
     catch (err) {
       console.error('Failed to load products', err);
-      this.errorMessage.set('Failed to load products')
+      this.errorMessage.set('Failed to load products');
+      this.hotToastService.error(this.errorMessage())
     } finally {
       this.isLoading.set(false);
     }
