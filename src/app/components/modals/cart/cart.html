@@ -1,21 +1,23 @@
 <main>
     <section>
         <header>
-            <h2>cart (0)</h2>
+            <h2>cart ({{cartService.cartCount()}})</h2>
             <a>Remove all</a>
         </header>
 
         <div class="items">
-            <div class="item">
-                <div class="left-side">
-                    <div class="image"></div>
-                    <div class="col">
-                        <p class="name">name</p>
-                        <span class="price">price</span>
+            @for (item of cartItems(); track $index) {
+                <div class="item">
+                    <div class="left-side">
+                        <div class="image"></div>
+                        <div class="col">
+                            <p class="name">{{item.name}}</p>
+                            <span class="price">{{item.price | currency:'USD':'symbol':'1.0-0'}}</span>
+                        </div>
                     </div>
+                    <app-quantity-button [quantity]="item.quantity"/>
                 </div>
-                <app-quantity-button [quantity]="1"/>
-            </div>
+            }
         </div>
 
 

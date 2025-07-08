@@ -12,8 +12,9 @@ import { CartService } from '../../services/cart-service';
 export class Header {
   protected authService = inject(AuthService);
   protected cartService = inject(CartService);
-  private router = inject(Router)
-  private route = inject(ActivatedRoute)
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  isModalOpen = signal<boolean>(false);
 
   constructor() {
     effect(() =>{
@@ -27,10 +28,16 @@ export class Header {
   }
 
   openCart() {
-    this.router.navigate(
-    [{ outlets: { modal: ['cart'] } }],
-      { relativeTo: this.route }
-  );
+    if (!this.isModalOpen()) {
+      this.router.navigate(
+      [{ outlets: { modal: ['cart'] } }],
+      { relativeTo: this.route });
+      this.isModalOpen.set(true);
+    }
+    else {
+      this.router.navigate([{ outlets: { modal: null } }], { relativeTo: this.route.parent });
+      this.isModalOpen.set(false);
+    }
 
   }
 }
