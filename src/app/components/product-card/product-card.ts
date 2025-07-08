@@ -4,6 +4,7 @@ import { Product, ProductImageSet } from '../../models/product';
 import { ProductsService } from '../../services/products-service';
 import { Router } from '@angular/router';
 import { Spinner } from "../../shared/spinner/spinner";
+import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-product-card',
@@ -18,7 +19,8 @@ export class ProductCard {
   productImages = signal<ProductImageSet[]>([]);
   productId = signal<number>(0);
   isLoading = signal<boolean>(false);
-  errorMessage = signal<string>('');
+  private hotToastService = inject(HotToastService);
+
   
   constructor() {
     effect(() => {
@@ -38,7 +40,7 @@ export class ProductCard {
     }
     catch (err) {
       console.error('Failed to load products images', err);
-      this.errorMessage.set('Failed to load products images')
+      this.hotToastService.error('Failed to load products images')
     } finally {
       this.isLoading.set(false);
     }
