@@ -17,6 +17,7 @@ export class ItemCard {
  product = input<Product | null>();
  isLoading = signal<boolean>(false);
  errorMessage = signal<string>('');
+ successMessage = signal<string>('');
  private cartService = inject(CartService);
  private authService = inject(AuthService);
  currentQuantity = signal<number>(1);
@@ -35,13 +36,23 @@ export class ItemCard {
     this.errorMessage.set('User not authenticated')
   }
 
-  await this.cartService.addToCart({
-    product_id: productId,
-    price,
-    name,
-    quantity: this.currentQuantity(),
-    user_id: this.currentUserId()
-  })
+  try {
+
+    await this.cartService.addToCart({
+      product_id: productId,
+      price,
+      name,
+      quantity: this.currentQuantity(),
+      user_id: this.currentUserId() || 'N/A'
+    })
+    this.successMessage.set('Item added to cart successfully');
+  }
+  catch(err: any) {
+    this.errorMessage.set(err.message)
+  }
+  finally {
+    this.currentQuantity.set(1)
+  }
  }
 
  onQuantityChanged(quantity: number) {
