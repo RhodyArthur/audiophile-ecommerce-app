@@ -20,8 +20,8 @@ export class PasswordReset {
   isLoading = signal<boolean>(false);
 
   resetForm: FormGroup = this.fb.group({
-    password: ['', [Validators.required, Validators.minLength(8)]],
-    confirmPassword: ['' , [Validators.required, Validators.minLength(8), passwordStructureValidator()]]
+    password: ['', [Validators.required, Validators.minLength(8), passwordStructureValidator()]],
+    confirmPassword: ['' , [Validators.required, Validators.minLength(8)]]
   }, {validators: passwordMatchValidator})
 
 
