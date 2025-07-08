@@ -52,10 +52,10 @@ export class CartService {
     }
 
     // Update local cart count reactively
-    this.cartCount.update(count => count + item.quantity!);
+    await this.fetchCartCount(item.user_id!);
   }
 
-    async fetchCartCount(userId: string) {
+  async fetchCartCount(userId: string) {
     const { count, error } = await this.supabase
       .getClient()
       .from('cart')
@@ -65,5 +65,19 @@ export class CartService {
     if (!error && count !== null) {
       this.cartCount.set(count);
     }
+  }
+
+  async getCartItems(userId: string): Promise<Cart[]> {
+    const { data, error } = await this.supabase
+      .getClient()
+      .from('cart')
+      .select('*')
+      .eq('user_id', userId);
+
+    if (error) {
+      console.error('Error getting cart items:', error.message);
+      throw error;
+    }
+    return data
   }
 }

@@ -1,0 +1,91 @@
+@use '../../../../styles/_breakpoints' as *
+@use '../../../../styles/_mixin' as *
+@use '../../../../styles/_typography' as *
+@use '../../../../styles/_variables' as *
+
+main
+    @include flex-container(flex, flex-start, center, column)
+    background-color: rgba(0, 0, 0, 0.6)
+    position: absolute
+    left: 0
+    right: 0
+    top: pxToRem(91)
+    height: calc( 100dvh -  91px)
+    padding: 1.5rem
+    overflow: auto
+    z-index: 1000
+
+    section
+        @include flex-container(flex, flex-start, null, column)
+        gap: 2rem
+        background-color: $white
+        width: 100%
+        border-radius: 0.5rem
+        padding: 2rem pxToRem(28)
+
+        header
+            @include flex-container(flex, space-between, center, row)
+            color: $black
+
+            h2
+                @extend .h6-manrope-bold
+                text-transform: uppercase
+
+            a
+                opacity: 0.5
+                @extend .body-medium
+                text-decoration: 1px solid $grey underline
+                cursor: pointer
+
+        .items
+            @include flex-container(flex, flex-start, null, column)
+            gap: 1.5rem
+
+            .item
+                @include flex-container(flex, space-between, center, row)
+
+                .left-side
+                    @include flex-container(flex, space-between, center, row)
+                    gap: 1rem
+
+                    .image
+                        width: 4rem
+                        height: 4rem
+                        border-radius: 0.5rem
+                        background-color: $light-grey
+
+                    .col
+                        @include flex-container(flex, null, null, column)
+
+                        .name
+                            @extend .body-medium
+                            font-weight: 700
+                            color: $black
+
+                        .price
+                            @extend .overline
+                            font-weight: 700
+                            color: $black
+                            opacity: 0.5
+
+
+        .total-checkout
+            @include flex-container(flex, null, null, column)
+            gap: 1.5rem
+
+            .total
+                @include flex-container(flex, space-between, center, row)
+
+                p
+                    text-transform: uppercase
+                    color: $black
+                    opacity: 0.5
+                    @extend .body-medium
+
+                span
+                    @extend .h6-manrope-bold
+
+        ::ng-deep app-button > button
+            width: 100%
+
+            

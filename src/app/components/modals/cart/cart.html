@@ -1,0 +1,34 @@
+<main>
+    <section>
+        <header>
+            <h2>cart (0)</h2>
+            <a>Remove all</a>
+        </header>
+
+        <div class="items">
+            <div class="item">
+                <div class="left-side">
+                    <div class="image"></div>
+                    <div class="col">
+                        <p class="name">name</p>
+                        <span class="price">price</span>
+                    </div>
+                </div>
+                <app-quantity-button [quantity]="1"/>
+            </div>
+        </div>
+
+
+        <div class="total-checkout">
+            <div class="total">
+                <p>total</p>
+                <span>{{4513 | currency:'USD':'symbol':'1.0-0'}}</span>
+            </div>
+
+            <div class="btn-container">
+                <app-button [label]="'checkout'"/>
+            </div>
+        </div>
+
+    </section>
+</main>
