@@ -2,16 +2,20 @@
     <section>
         <header>
             <h2>cart ({{cartService.cartCount()}})</h2>
-            <a>Remove all</a>
+            <a (click)="removeall()">Remove all</a>
         </header>
 
         <div class="items">
+            @if (isLoading()) {
+                <app-spinner/>
+            }
+
             @for (item of cartItems(); track $index) {
                 <div class="item">
                     <div class="left-side">
                         <div class="image"></div>
                         <div class="col">
-                            <p class="name">{{item.name}}</p>
+                            <p class="name">{{item.name | slice:0:12}}</p>
                             <span class="price">{{item.price | currency:'USD':'symbol':'1.0-0'}}</span>
                         </div>
                     </div>
@@ -24,7 +28,7 @@
         <div class="total-checkout">
             <div class="total">
                 <p>total</p>
-                <span>{{4513 | currency:'USD':'symbol':'1.0-0'}}</span>
+                <span>{{getItemsTotal() | currency:'USD':'symbol':'1.0-0'}}</span>
             </div>
 
             <div class="btn-container">

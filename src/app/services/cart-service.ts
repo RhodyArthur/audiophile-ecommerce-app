@@ -80,4 +80,19 @@ export class CartService {
     }
     return data
   }
+
+  async deleteAllCartItems(userId: string) {
+    const {data, error} = await this.supabase
+      .getClient()
+      .from('cart')
+      .delete()
+      .eq('user_id', userId)
+
+      if (error) {
+      console.error('Error getting cart items:', error.message);
+      throw error;
+    }
+
+    return data
+  }
 }

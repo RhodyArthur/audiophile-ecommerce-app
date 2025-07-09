@@ -22,6 +22,9 @@ main
         width: 100%
         border-radius: 0.5rem
         padding: 2rem pxToRem(28)
+        overflow: scroll
+        scroll-behavior: smooth
+        scrollbar-width: none
 
         header
             @include flex-container(flex, space-between, center, row)
@@ -37,12 +40,18 @@ main
                 text-decoration: 1px solid $grey underline
                 cursor: pointer
 
+                &:hover
+                    color: $primary-orange
+                    text-decoration: 1px solid $primary-orange underline
+
         .items
             @include flex-container(flex, flex-start, null, column)
             gap: 1.5rem
 
             .item
                 @include flex-container(flex, space-between, center, row)
+                width: 100%
+                gap: pxToRem(19)
 
                 .left-side
                     @include flex-container(flex, space-between, center, row)
@@ -88,4 +97,9 @@ main
         ::ng-deep app-button > button
             width: 100%
 
-            
+@include mq(tablet)
+    main
+        section
+            position: relative
+            left: 22%
+            width: pxToRem(377)           

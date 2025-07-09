@@ -1,16 +1,17 @@
 import { Component, effect, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { Button } from "../../../shared/button/button";
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, SlicePipe } from '@angular/common';
 import { QuantityButton } from "../../../shared/quantity-button/quantity-button";
 import { CartService } from '../../../services/cart-service';
 import { AuthService } from '../../../services/auth-service';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { Cart as cartInterface } from '../../../models/cart';
+import { Spinner } from "../../../shared/spinner/spinner";
 
 
 @Component({
   selector: 'app-cart',
-  imports: [Button, CurrencyPipe, QuantityButton],
+  imports: [Button, CurrencyPipe, QuantityButton, Spinner, SlicePipe],
   templateUrl: './cart.html',
   styleUrl: './cart.sass'
 })
@@ -35,6 +36,7 @@ export class Cart implements OnInit, OnDestroy{
   }
 
   async getItemsPerUser() {
+    this.isLoading.set(true);
     try {
       let items = await this.cartService.getCartItems(this.currentUserId());
       this.cartItems.set(items)
@@ -43,15 +45,39 @@ export class Cart implements OnInit, OnDestroy{
       this.hotToastService.error(err.message)
     }
     finally {
-
+      this.isLoading.set(false);
     }
   }
 
-  ngOnDestroy() {
-    document.body.style.overflow = '';
+  getItemsTotal(): number {
+    return this.cartItems().reduce((curr, acc) => curr + acc.quantity * acc.price, 0)
   }
 
   getUserId() {
     this.currentUserId.set(this.authService.currentUser()?.id!)
+  }
+
+  async removeall() {
+    this.isLoading.set(true);
+    try {
+      await this.cartService.deleteAllCartItems(this.currentUserId());
+      await this.cartService.fetchCartCount(this.currentUserId());
+      this.cartItems.set([]);
+      this.hotToastService.success('Successfully cleared all cart items');
+    }
+    catch(err: any) {
+      this.hotToastService.error(err.message);
+    }
+    finally {
+      this.isLoading.set(false);
+    }
+  }
+
+  checkoutItems() {
+
+  }
+
+  ngOnDestroy() {
+    document.body.style.overflow = '';
   }
 }
