@@ -33,7 +33,8 @@ export class ItemCard {
   const { id: productId, price, name } = product
 
   if (!this.currentUserId()) {
-    this.hotToastService.error('You must be logged in')
+    this.hotToastService.error('You must be logged in');
+    return;
   }
 
 

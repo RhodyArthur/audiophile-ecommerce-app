@@ -34,16 +34,6 @@ main
                 @extend .h6-manrope-bold
                 text-transform: uppercase
 
-            a
-                opacity: 0.5
-                @extend .body-medium
-                text-decoration: 1px solid $grey underline
-                cursor: pointer
-
-                &:hover
-                    color: $primary-orange
-                    text-decoration: 1px solid $primary-orange underline
-
         .items
             @include flex-container(flex, flex-start, null, column)
             gap: 1.5rem
@@ -94,9 +84,24 @@ main
 
                 span
                     @extend .h6-manrope-bold
+        .btn
+            @include flex-container(flex, null, center, column)
+
+            a
+                font-size: 0.75rem
 
         ::ng-deep app-button > button
             width: 100%
+
+a
+    opacity: 0.5
+    @extend .body-medium
+    text-decoration: 1px solid $grey underline
+    cursor: pointer
+
+    &:hover
+        color: $primary-orange
+        text-decoration: 1px solid $primary-orange underline
 
 @include mq(tablet)
     main

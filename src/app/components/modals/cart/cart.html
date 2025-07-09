@@ -2,7 +2,7 @@
     <section>
         <header>
             <h2>cart ({{cartService.cartCount()}})</h2>
-            <a (click)="removeall()">Remove all</a>
+            <a (click)="removeall()" >Remove all</a>
         </header>
 
         <div class="items">
@@ -28,7 +28,11 @@
                             <span class="price">{{item.price | currency:'USD':'symbol':'1.0-0'}}</span>
                         </div>
                     </div>
-                    <app-quantity-button [quantity]="itemQuantities()[item.id]" (quantityChanged)="onQuantityChanged(item.id, $event)"/>
+
+                    <div class="btn">
+                        <app-quantity-button [quantity]="itemQuantities()[item.id]" (quantityChanged)="onQuantityChanged(item.id, $event)"/>
+                        <a (click)="deleteItem(item.id)">Remove</a>
+                    </div>
                 </div>
             }
         </div>
@@ -41,7 +45,7 @@
             </div>
 
             <div class="btn-container">
-                <app-button [label]="'checkout'"/>
+                <app-button [label]="'checkout'" (click)="checkoutItems()"/>
             </div>
         </div>
 

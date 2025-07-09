@@ -9,7 +9,7 @@ import { Cart as cartInterface } from '../../../models/cart';
 import { Spinner } from "../../../shared/spinner/spinner";
 import { ProductsService } from '../../../services/products-service';
 import { ProductImageSet } from '../../../models/product';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -24,7 +24,8 @@ export class Cart implements OnInit, OnDestroy{
   private authService = inject(AuthService);
   private hotToastService = inject(HotToastService);
   private productService = inject(ProductsService);
-  private router = inject(Router)
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
   currentUserId = signal<string>('');
   isLoading = signal<boolean>(false);
   cartItems = signal<cartInterface[]>([]);
@@ -86,6 +87,10 @@ export class Cart implements OnInit, OnDestroy{
 
 
   async removeall() {
+    if (this.cartItems().length === 0) {
+      this.hotToastService.info('There are no items in cart to delete');
+      return;
+    }
     this.isLoading.set(true);
     try {
       await this.cartService.deleteAllCartItems(this.currentUserId());
@@ -101,8 +106,34 @@ export class Cart implements OnInit, OnDestroy{
     }
   }
 
-  checkoutItems() {
+  async deleteItem(cartId: number) {
+    this.isLoading.set(true);
+    try {
+      await this.cartService.deleteCartItem(cartId);
+      await this.cartService.fetchCartCount(this.currentUserId());
+      const updatedItems = await this.cartService.getCartItems(this.currentUserId());
+      this.cartItems.set(updatedItems);
 
+      this.hotToastService.success('Successfully deleted cart item');
+    }
+    catch(err: any) {
+      this.hotToastService.error(err.message);
+    }
+    finally {
+      this.isLoading.set(false);
+    }
+  }
+
+  checkoutItems() {
+    if (this.cartItems().length <= 0) {
+      this.hotToastService.info('There are no items to checkout')
+      return;
+    }
+
+    this.router.navigate([{ outlets: { modal: null } }], { relativeTo: this.route.parent })
+    .then(() => {
+      this.router.navigate(['checkout']);
+    });
   }
 
   async getProductImages() {

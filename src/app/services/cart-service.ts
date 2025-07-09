@@ -96,6 +96,21 @@ export class CartService {
     return data 
   }
 
+  async deleteCartItem(itemId: number) {
+    const {data, error} = await this.supabase
+      .getClient()
+      .from('cart')
+      .delete()
+      .eq('id', itemId)
+
+      if (error) {
+      console.error('Error deleting cart item:', error.message);
+      throw error;
+    }
+
+    return true
+  }
+
   async deleteAllCartItems(userId: string) {
     const {data, error} = await this.supabase
       .getClient()
