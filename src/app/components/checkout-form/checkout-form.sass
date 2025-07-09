@@ -1,0 +1,61 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+main
+    @include flex-container(flex, null, null, column)
+    gap: 2rem
+    background-color: $white
+    padding: 1.5rem
+
+    h2
+        text-transform: uppercase
+        @extend .h4-manrope-bold
+        letter-spacing: 1px
+
+    form
+        @include flex-container(flex, null, null, column)
+        gap: 2rem
+
+        .form-group
+            @include flex-container(flex, null, null, column)
+            gap: 1rem
+
+            h5
+                text-transform: uppercase
+                color: $primary-orange
+                @extend .sub-title
+
+
+            .input-fields
+                @include flex-container(flex, null, null, column)
+                gap: 1.5rem
+
+                .input-group
+                    @include flex-container(flex, null, null, column)
+                    gap: pxToRem(9)
+
+
+
+            .radio-group
+                @include flex-container(flex, null, center, row)
+                gap: 1rem
+               
+                label
+                    @extend .overline
+label
+    font-size: 0.75rem
+    font-weight: 700
+    cursor: pointer
+
+input, .radio-group
+    border-radius: 0.5rem
+    border: 1px solid $border-grey
+    outline: none
+    padding: 1.125rem 1.5rem
+    // width: 100%
+
+    &:hover
+        border: 1px solid $primary-orange
+    
