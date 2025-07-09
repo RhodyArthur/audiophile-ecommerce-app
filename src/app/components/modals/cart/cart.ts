@@ -7,6 +7,9 @@ import { AuthService } from '../../../services/auth-service';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { Cart as cartInterface } from '../../../models/cart';
 import { Spinner } from "../../../shared/spinner/spinner";
+import { ProductsService } from '../../../services/products-service';
+import { ProductImageSet } from '../../../models/product';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,14 +23,19 @@ export class Cart implements OnInit, OnDestroy{
   protected cartService = inject(CartService);
   private authService = inject(AuthService);
   private hotToastService = inject(HotToastService);
+  private productService = inject(ProductsService);
+  private router = inject(Router)
   currentUserId = signal<string>('');
   isLoading = signal<boolean>(false);
   cartItems = signal<cartInterface[]>([]);
+  itemQuantities = signal<Record<number, number>>({});
+  productImagesList = signal<ProductImageSet[][]>([]);
+
 
   constructor() {
     effect(() => {
       this.getUserId();
-      this.getItemsPerUser()
+      this.getItemsPerUser();
     })
   }
 
@@ -39,7 +47,17 @@ export class Cart implements OnInit, OnDestroy{
     this.isLoading.set(true);
     try {
       let items = await this.cartService.getCartItems(this.currentUserId());
-      this.cartItems.set(items)
+      this.cartItems.set(items);
+      
+      const quantities: Record<number, number> = {};
+      for (const item of items) {
+        quantities[item.id] = item.quantity;
+      }
+      this.itemQuantities.set(quantities);
+
+      if (items.length > 0) {
+      await this.getProductImages();
+    }
     }
     catch(err: any) {
       this.hotToastService.error(err.message)
@@ -50,12 +68,22 @@ export class Cart implements OnInit, OnDestroy{
   }
 
   getItemsTotal(): number {
-    return this.cartItems().reduce((curr, acc) => curr + acc.quantity * acc.price, 0)
+    const quantities = this.itemQuantities();
+    return this.cartItems().reduce((total, item) => {
+      const quantity = quantities[item.id] ?? item.quantity;
+      return total + quantity * item.price;
+    }, 0);
   }
 
-  getUserId() {
+  getUserId() {    
     this.currentUserId.set(this.authService.currentUser()?.id!)
   }
+
+  onQuantityChanged(itemId: number, newQuantity: number) {
+    this.itemQuantities.update(q => ({ ...q, [itemId]: newQuantity }));
+    this.cartService.updateCartItemQuantity(itemId, newQuantity);
+  }
+
 
   async removeall() {
     this.isLoading.set(true);
@@ -76,6 +104,17 @@ export class Cart implements OnInit, OnDestroy{
   checkoutItems() {
 
   }
+
+  async getProductImages() {
+    const productIds = this.cartItems().map(item => item.product_id);
+
+    const imagesList = await Promise.all(
+      productIds.map(id => this.productService.fetchProductImagesById(id))
+    );
+
+    this.productImagesList.set(imagesList);
+  }
+
 
   ngOnDestroy() {
     document.body.style.overflow = '';

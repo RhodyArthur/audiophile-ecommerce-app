@@ -81,6 +81,21 @@ export class CartService {
     return data
   }
 
+  async updateCartItemQuantity(itemId: number, newQuantity: number) {
+    const { data, error } = await this.supabase
+    .getClient()
+    .from('cart')
+    .update({quantity: newQuantity})
+    .eq('id', itemId)
+
+    if (error) {
+      console.error('Error updating cart item quantity:', error.message);
+      throw error;
+    }
+
+    return data 
+  }
+
   async deleteAllCartItems(userId: string) {
     const {data, error} = await this.supabase
       .getClient()
@@ -89,7 +104,7 @@ export class CartService {
       .eq('user_id', userId)
 
       if (error) {
-      console.error('Error getting cart items:', error.message);
+      console.error('Error deleting cart items:', error.message);
       throw error;
     }
 

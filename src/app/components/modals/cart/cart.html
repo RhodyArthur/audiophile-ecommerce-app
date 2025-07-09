@@ -10,16 +10,25 @@
                 <app-spinner/>
             }
 
-            @for (item of cartItems(); track $index) {
+            @for (item of cartItems(); track item.id) {
                 <div class="item">
                     <div class="left-side">
-                        <div class="image"></div>
+
+                        @if (productImagesList()[$index]) {
+                             <div class="image">
+                                 <img 
+                                     [src]="productImagesList()[$index][0].mobile_url" 
+                                     alt="Product image"
+                                 />
+                             </div>
+                        }
+
                         <div class="col">
                             <p class="name">{{item.name | slice:0:12}}</p>
                             <span class="price">{{item.price | currency:'USD':'symbol':'1.0-0'}}</span>
                         </div>
                     </div>
-                    <app-quantity-button [quantity]="item.quantity"/>
+                    <app-quantity-button [quantity]="itemQuantities()[item.id]" (quantityChanged)="onQuantityChanged(item.id, $event)"/>
                 </div>
             }
         </div>
