@@ -18,8 +18,10 @@
     </nav>
 
     
-    <div class="cart">
+    <div class="cart" (click)="openCart()">
         <img src="/assets/icons/cart.svg" alt="cart icon" class="cart-icon">
         <span>{{cartService.cartCount()}}</span>
     </div>
 </header>
+<router-outlet name="modal"/>
+
