@@ -52,10 +52,10 @@ export class CartService {
     }
 
     // Update local cart count reactively
-    this.cartCount.update(count => count + item.quantity!);
+    await this.fetchCartCount(item.user_id!);
   }
 
-    async fetchCartCount(userId: string) {
+  async fetchCartCount(userId: string) {
     const { count, error } = await this.supabase
       .getClient()
       .from('cart')
@@ -65,5 +65,64 @@ export class CartService {
     if (!error && count !== null) {
       this.cartCount.set(count);
     }
+  }
+
+  async getCartItems(userId: string): Promise<Cart[]> {
+    const { data, error } = await this.supabase
+      .getClient()
+      .from('cart')
+      .select('*')
+      .eq('user_id', userId);
+
+    if (error) {
+      console.error('Error getting cart items:', error.message);
+      throw error;
+    }
+    return data
+  }
+
+  async updateCartItemQuantity(itemId: number, newQuantity: number) {
+    const { data, error } = await this.supabase
+    .getClient()
+    .from('cart')
+    .update({quantity: newQuantity})
+    .eq('id', itemId)
+
+    if (error) {
+      console.error('Error updating cart item quantity:', error.message);
+      throw error;
+    }
+
+    return data 
+  }
+
+  async deleteCartItem(itemId: number) {
+    const {data, error} = await this.supabase
+      .getClient()
+      .from('cart')
+      .delete()
+      .eq('id', itemId)
+
+      if (error) {
+      console.error('Error deleting cart item:', error.message);
+      throw error;
+    }
+
+    return true
+  }
+
+  async deleteAllCartItems(userId: string) {
+    const {data, error} = await this.supabase
+      .getClient()
+      .from('cart')
+      .delete()
+      .eq('user_id', userId)
+
+      if (error) {
+      console.error('Error deleting cart items:', error.message);
+      throw error;
+    }
+
+    return data
   }
 }

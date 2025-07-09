@@ -7,5 +7,4 @@ export interface Cart {
     price: number;
     quantity: number;
     user_id: string;
-    product_gallery: ProductGallery[]
 }

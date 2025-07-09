@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
+import { authGuardGuard } from './guards/auth-guard-guard';
 
 export const routes: Routes = [
     {path: '', component: Home},
@@ -26,9 +27,19 @@ export const routes: Routes = [
     },
     {
         path: 'product-details/:id',
-        loadComponent: () => import('./pages/product-details/product-details').then(m => m.ProductDetails),
+        loadComponent: () => import('./pages/product-details/product-details').then(m => m.ProductDetails)
     },
-  
+    {
+        path: 'cart',
+        outlet: 'modal',
+        loadComponent: () => import('./components/modals/cart/cart').then(m => m.Cart),
+        canActivate: [authGuardGuard]
+    },  
+    {
+        path: 'checkout',
+        loadComponent: () => import('./pages/checkout/checkout').then(m => m.Checkout),
+        canActivate: [authGuardGuard]
+    },
     
     {path: '**', redirectTo: ''}
 ];
