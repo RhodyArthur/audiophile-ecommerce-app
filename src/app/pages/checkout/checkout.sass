@@ -1,0 +1,27 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+main
+    @include flex-container(flex, null, null, column)
+    gap: 1.5rem
+    padding: 1rem 1.5rem pxToRem(120)
+    background-color: $off-white
+
+    a
+        text-decoration: none
+        cursor: pointer
+        @extend .body-medium
+        color: $black
+        opacity: 0.5
+
+@include mq(tablet)
+    main
+        padding: pxToRem(48) 2.5rem
+
+@media ( min-width:  64rem)
+    main
+        border: 1px solid green
+        padding: pxToRem(79) pxToRem(165) pxToRem(141)
+        // margin: auto

@@ -6,7 +6,7 @@
 main
     @include flex-container(flex, flex-start, null, column)
     gap: 2rem
-    background-color: $off-white
+    
 
     section
         @include flex-container(flex, null, null, column)
@@ -166,6 +166,9 @@ main
                 span
                     @extend .h6-manrope-bold
 
+                .grand
+                    color: $primary-orange
+
         ::ng-deep app-button > button
             width: 100%
     label, p
@@ -223,6 +226,17 @@ main
         section
             width: pxToRem(730)
             padding: pxToRem(54) pxToRem(48)
+
+@include mq(desktop)
+    main
+        @include flex-container(flex, space-between, flex-start, row)
+
+        section
+            margin: 0
+
+        .summary
+            width: pxToRem(350)
+            padding: 2rem
 
                 
 
