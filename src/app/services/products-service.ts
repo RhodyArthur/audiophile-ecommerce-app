@@ -57,7 +57,7 @@ export class ProductsService {
     return data as ProductImageSet[]
   }
 
-  async fetchProductDetails(id: number) {
+  async fetchProductDetails(slug: string) {
     const { data, error } = await this.supabaseService
       .getClient()
       .from('products')
@@ -67,11 +67,11 @@ export class ProductsService {
         product_includes (*),
         product_gallery (*)
       `)
-      .eq('id', id)
+      .eq('slug', slug)
       .single();
 
     if (error) {
-      console.error('fetchProductDetails error', error);
+      console.error('fetchProductDetails error', error.message);
       return null;
     }
     return data as Product
