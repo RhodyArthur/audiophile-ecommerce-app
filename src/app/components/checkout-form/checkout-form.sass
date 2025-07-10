@@ -35,6 +35,13 @@ main
                     @include flex-container(flex, null, null, column)
                     gap: pxToRem(9)
 
+                    &.invalid
+                        label
+                            color: $red
+
+                        input
+                            border: 1px solid $red
+                            
                 .cash-info
                     @include flex-container(flex, null, center, row)
                     gap: 2rem
@@ -95,6 +102,9 @@ input, .radio-group
 
     &:hover
         border: 1px solid $primary-orange
+        cursor: pointer
+
+
     
 @include mq(tablet)
     main

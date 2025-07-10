@@ -1,24 +1,60 @@
 <main>
     <h2>checkout</h2>
 
-    <form>
-        <div class="form-group">
+    <form [formGroup]="checkoutForm">
+        <div class="form-group" formGroupName="billingDetails">
             <h5>billing details</h5>
 
             <div class="input-fields">
-                <div class="input-group">
+                <div class="input-group" [class.invalid]="checkoutForm.get('billingDetails.name')?.invalid && 
+                    (checkoutForm.get('billingDetails.name')?.touched || checkoutForm.get('billingDetails.name')?.dirty)">
                     <label for="name">Name</label>
-                    <input type="text" id="name" placeholder="Alexi Ward" autocomplete="name">
+                    <input type="text" id="name" placeholder="Alexi Ward" autocomplete="name" formControlName="name">
+                    @if(checkoutForm.get('billingDetails.name')?.invalid && 
+                        (checkoutForm.get('billingDetails.name')?.touched || checkoutForm.get('billingDetails.name')?.dirty)) {
+      
+                        @if (checkoutForm.get('billingDetails.name')?.errors?.['required']) {
+                            <small class="error">Can't be empty</small>
+                        }
+                        @if (checkoutForm.get('billingDetails.name')?.errors?.['minlength']) {
+                            <small class="error">Name must be at least 3 characters</small>
+                        }
+                    }
                 </div>
 
-                <div class="input-group">
+                <div class="input-group" [class.invalid]="checkoutForm.get('billingDetails.email')?.invalid && 
+                    (checkoutForm.get('billingDetails.email')?.touched || checkoutForm.get('billingDetails.email')?.dirty)">
+
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="alexi@mail.com" autocomplete="email">
+                    <input type="email" id="email" placeholder="alexi@mail.com" autocomplete="email" formControlName="email"
+                    >
+                    @if(checkoutForm.get('billingDetails.email')?.invalid && 
+                        (checkoutForm.get('billingDetails.email')?.touched || checkoutForm.get('billingDetails.email')?.dirty)) {
+      
+                        @if (checkoutForm.get('billingDetails.email')?.errors?.['required']) {
+                            <small class="error">Can't be empty</small>
+                        }
+                        @if (checkoutForm.get('billingDetails.email')?.errors?.['email']) {
+                            <small class="error">Wrong Format</small>
+                        }
+                    }
                 </div>
 
-                <div class="input-group">
+                <div class="input-group" [class.invalid]="checkoutForm.get('billingDetails.phone')?.invalid && 
+                    (checkoutForm.get('billingDetails.phone')?.touched || checkoutForm.get('billingDetails.phone')?.dirty)">
+
                     <label for="phone">Phone Number</label>
-                    <input type="number" id="phone" placeholder="+1 202-555-0136" autocomplete="tel">
+                    <input type="number" id="phone" placeholder="+1 202-555-0136" autocomplete="tel" formControlName="phone">
+                    @if(checkoutForm.get('billingDetails.phone')?.invalid && 
+                        (checkoutForm.get('billingDetails.phone')?.touched || checkoutForm.get('billingDetails.phone')?.dirty)) {
+      
+                        @if (checkoutForm.get('billingDetails.phone')?.errors?.['required']) {
+                            <small class="error">Can't be empty</small>
+                        }
+                        @if (checkoutForm.get('billingDetails.phone')?.errors?.['invalidPhoneNumber']) {
+                            <small class="error">Invalid phone number</small>
+                        }
+                    }
                 </div>
             </div>
         </div>
