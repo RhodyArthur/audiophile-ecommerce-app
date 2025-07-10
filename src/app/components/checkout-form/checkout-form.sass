@@ -4,7 +4,7 @@
 @use '../../../styles/_typography' as *
 
 main
-    @include flex-container(flex, null, null, column)
+    @include flex-container(flex, flex-start, null, column)
     gap: 2rem
     background-color: $off-white
 
@@ -15,10 +15,15 @@ main
         padding: 1.5rem
         border-radius: 0.5rem
 
-        h2
+        h2, h3
             text-transform: uppercase
-            @extend .h4-manrope-bold
             letter-spacing: 1px
+            
+        h2
+            @extend .h4-manrope-bold
+
+        h3
+            @extend .h6-manrope-bold
 
         form
             @include flex-container(flex, null, null, column)
@@ -99,6 +104,70 @@ main
                     input[type="radio"]:checked + .custom-radio::after
                         transform: translate(-50%, -50%) scale(1)
 
+        .items
+            @include flex-container(flex, flex-start, null, column)
+            gap: 1.5rem
+
+            .item
+                @include flex-container(flex, space-between, center, row)
+                width: 100%
+                gap: pxToRem(19)
+
+                .left-side
+                    @include flex-container(flex, space-between, center, row)
+                    gap: 1rem
+
+                    .image
+                        width: 4rem
+                        height: 4rem
+                        background-color: $light-grey
+
+                        img
+                            border-radius: 0.5rem
+
+                    .col
+                        @include flex-container(flex, null, null, column)
+
+                        .name
+                            @extend .body-medium
+                            font-weight: 700
+                            color: $black
+
+                        .price
+                            @extend .overline
+                            font-weight: 700
+                            color: $black
+                            opacity: 0.5
+
+                .quantity
+                    @extend .body-medium
+                    font-weight: 700
+                    color: $black
+                    opacity: 0.5
+    
+        .text-container
+            @include flex-container(flex, null, null, column)
+            gap: 1.5rem
+
+            .total-checkout
+                @include flex-container(flex, null, null, column)
+                gap: 0.5rem
+
+            .total
+                @include flex-container(flex, space-between, center, row)
+
+                p
+                    text-transform: uppercase
+                    color: $black
+                    opacity: 0.5
+                    @extend .body-medium
+                    font-weight: 400
+
+                span
+                    @extend .h6-manrope-bold
+
+        ::ng-deep app-button > button
+            width: 100%
     label, p
         font-size: 0.75rem
         font-weight: 700
@@ -118,8 +187,9 @@ main
     
 @include mq(tablet)
     main
+
         section
-            max-width: pxToRem(689)
+            width: pxToRem(689)
             padding: pxToRem(30) pxToRem(27)
             margin: auto
 
@@ -151,7 +221,7 @@ main
 @media ( min-width:  64rem)
     main
         section
-            max-width: pxToRem(730)
+            width: pxToRem(730)
             padding: pxToRem(54) pxToRem(48)
 
                 

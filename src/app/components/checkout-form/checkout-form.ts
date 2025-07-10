@@ -4,10 +4,11 @@ import { phoneNumberValidator } from '../../shared/validators/phoneNumber.valida
 import { Subscription } from 'rxjs/internal/Subscription';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject, takeUntil } from 'rxjs';
+import { Button } from "../../shared/button/button";
 
 @Component({
   selector: 'app-checkout-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, Button],
   templateUrl: './checkout-form.html',
   styleUrl: './checkout-form.sass'
 })
