@@ -6,6 +6,7 @@
 main
     @include flex-container(flex, null, null, column)
     gap: pxToRem(120)
+    padding-bottom: pxToRem(120)
 
     section
         @include flex-container(flex, null, null, column)
@@ -156,8 +157,4 @@ main
 
                     .features
                         width: pxToRem(635)
-            
-        .hero
-            background-color: $black100
-        .footer
-            background-color: $black
+

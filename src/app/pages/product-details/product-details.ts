@@ -4,7 +4,6 @@ import { Product, RelatedProduct } from '../../models/product';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsCategory } from "../../components/products-category/products-category";
 import { About } from "../../components/about/about";
-import { Footer } from "../../components/footer/footer";
 import { ItemCard } from "../../components/item-card/item-card";
 import { Location } from '@angular/common';
 import { Spinner } from "../../shared/spinner/spinner";
@@ -13,7 +12,7 @@ import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-product-details',
-  imports: [ProductsCategory, About, Footer, ItemCard, Spinner, RelatedProductCard],
+  imports: [ProductsCategory, About, ItemCard, Spinner, RelatedProductCard],
   templateUrl: './product-details.html',
   styleUrl: './product-details.sass'
 })
