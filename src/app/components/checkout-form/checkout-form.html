@@ -3,7 +3,7 @@
 
         <h2>checkout</h2>
     
-        <form [formGroup]="checkoutForm">
+        <form [formGroup]="checkoutForm" (ngSubmit)="submit()">
             <div class="form-group" formGroupName="billingDetails">
                 <h5>billing details</h5>
     
@@ -209,24 +209,28 @@
         <h3>summary</h3>
 
         <div class="items">
-            <div class="item">
-                    <div class="left-side">
-
-                        <div class="image">
-                            <!-- <img 
-                                src="" 
-                                alt="Product image"
-                            /> -->
+            @for (item of cartItems(); track item.id) {
+                <div class="item">
+                        <div class="left-side">
+    
+                            @if (imageList()[$index]) {
+                             <div class="image">
+                                 <img 
+                                     [src]="imageList()[$index][0].mobile_url" 
+                                     alt="Product image"
+                                 />
+                             </div>
+                        }
+    
+                            <div class="col">
+                                <p class="name">{{item.name}}</p>
+                                <span class="price">{{item.price | currency:'USD':'symbol':'1.0-0'}}</span>
+                            </div>
                         </div>
-
-                        <div class="col">
-                            <p class="name">name</p>
-                            <span class="price">price</span>
-                        </div>
-                    </div>
-
-                    <span class="quantity">x1</span>
-            </div>
+    
+                        <span class="quantity">x{{item.quantity}}</span>
+                </div>
+            }
         </div>
 
         <div class="text-container">
@@ -234,21 +238,21 @@
             <div class="total-checkout">
                 <div class="total">
                     <p>total</p>
-                    <span>1234</span>
+                    <span>{{total() | currency:'USD':'symbol':'1.0-0'}}</span>
                 </div>
                 <div class="total">
                     <p>shipping</p>
-                    <span>1234</span>
+                    <span>{{shippingFee() | currency:'USD':'symbol':'1.0-0'}}</span>
                 </div>
                 <div class="total">
                     <p>vat (included)</p>
-                    <span>1234</span>
+                    <span>{{vat() | currency:'USD':'symbol':'1.0-0'}}</span>
                 </div>
             </div>
 
             <div class="total">
                 <p>grand total</p>
-                <span class="grand">5678</span>
+                <span class="grand">{{grandTotal() | currency:'USD':'symbol':'1.0-0'}}</span>
             </div>
         </div>
 

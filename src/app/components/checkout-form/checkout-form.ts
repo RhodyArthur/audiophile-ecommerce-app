@@ -1,20 +1,26 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, input, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { phoneNumberValidator } from '../../shared/validators/phoneNumber.validator';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject, takeUntil } from 'rxjs';
 import { Button } from "../../shared/button/button";
+import { Cart } from '../../models/cart';
+import { ProductImageSet } from '../../models/product';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-checkout-form',
-  imports: [ReactiveFormsModule, Button],
+  imports: [ReactiveFormsModule, Button, CurrencyPipe],
   templateUrl: './checkout-form.html',
   styleUrl: './checkout-form.sass'
 })
 export class CheckoutForm {
   private fb = inject(FormBuilder);
   isVirtual = signal<boolean>(true);
+  cartItems = input<Cart[]>([]);
+  imageList = input<ProductImageSet[][]>([]);
+  total = input<number>(0);
   private destroy$ = new Subject<void>();
 
   ngOnInit() {
@@ -51,6 +57,12 @@ export class CheckoutForm {
       console.log(this.checkoutForm.value)
     }
   }
+
+  shippingFee = computed(() => this.total() * (5/100))
+
+  vat = computed(() => this.total() * (2/100))
+
+  grandTotal = computed(() => this.total() + this.vat() + this.shippingFee())
 
   ngOnDestroy() {
     this.destroy$.next();
