@@ -3,106 +3,102 @@
 @use '../../../styles/_variables' as *
 @use '../../../styles/_typography' as *
 
-main
-    @include flex-container(flex, flex-start, null, column)
+form
+    @include flex-container(flex, null, null, column)
     gap: 2rem
-    
+
+    h2, h3
+        text-transform: uppercase
+        letter-spacing: 1px
+        
+    h2
+        @extend .h4-manrope-bold
+
+    h3
+        @extend .h6-manrope-bold
 
     section
         @include flex-container(flex, null, null, column)
-        gap: 2rem
-        background-color: $white
-        padding: 1.5rem
         border-radius: 0.5rem
+        gap: 2rem
+        padding: 1.5rem
+        background-color: $white
+    
 
-        h2, h3
-            text-transform: uppercase
-            letter-spacing: 1px
-            
-        h2
-            @extend .h4-manrope-bold
-
-        h3
-            @extend .h6-manrope-bold
-
-        form
+        .form-group
             @include flex-container(flex, null, null, column)
-            gap: 2rem
+            gap: 1rem
 
-            .form-group
+            h5
+                text-transform: uppercase
+                color: $primary-orange
+                @extend .sub-title
+
+            .input-fields, #shipping-info, #shipping
                 @include flex-container(flex, null, null, column)
-                gap: 1rem
+                gap: 1.5rem
 
-                h5
-                    text-transform: uppercase
-                    color: $primary-orange
-                    @extend .sub-title
-
-                .input-fields, #shipping-info, #shipping
+                .input-group
                     @include flex-container(flex, null, null, column)
-                    gap: 1.5rem
+                    gap: pxToRem(9)
+                    position: relative
 
-                    .input-group
-                        @include flex-container(flex, null, null, column)
-                        gap: pxToRem(9)
-                        position: relative
+                    &.invalid
+                        label
+                            color: $red
 
-                        &.invalid
-                            label
-                                color: $red
+                        input
+                            border: 1px solid $red
 
-                            input
-                                border: 1px solid $red
-
-                            small
-                                position: absolute
-                                right: 0
-                    .cash-info
-                        @include flex-container(flex, null, center, row)
-                        gap: 2rem
-
-                        .description
-                            color: $black
-                            opacity: 0.6
-                            @extend .body-medium
-                            font-weight: 300
-
-                .radio-group
+                        small
+                            position: absolute
+                            right: 0
+                .cash-info
                     @include flex-container(flex, null, center, row)
-                    gap: 1rem
-                    cursor: pointer
-                
-                    label
-                        @extend .overline
+                    gap: 2rem
 
-                    input[type="radio"]
-                        display: none
+                    .description
+                        color: $black
+                        opacity: 0.6
+                        @extend .body-medium
+                        font-weight: 300
 
-                    .custom-radio
-                        display: inline-block
-                        width: 1.25rem
-                        height: 1.25rem
-                        border: 2px solid $border-grey
-                        border-radius: 50%
-                        margin-right: 0.5rem
-                        vertical-align: middle
-                        position: relative
+            .radio-group
+                @include flex-container(flex, null, center, row)
+                gap: 1rem
+                cursor: pointer
+            
+                label
+                    @extend .overline
 
-                    .custom-radio::after
-                        content: ''
-                        display: block
-                        width: 10px
-                        height: 10px
-                        background-color: $primary-orange
-                        border-radius: 50%
-                        position: absolute
-                        top: 50%
-                        left: 50%
-                        transform: translate(-50%, -50%) scale(0)
-                        transition: transform 0.2s ease-in-out
+                input[type="radio"]
+                    display: none
 
-                    input[type="radio"]:checked + .custom-radio::after
-                        transform: translate(-50%, -50%) scale(1)
+                .custom-radio
+                    display: inline-block
+                    width: 1.25rem
+                    height: 1.25rem
+                    border: 2px solid $border-grey
+                    border-radius: 50%
+                    margin-right: 0.5rem
+                    vertical-align: middle
+                    position: relative
+
+                .custom-radio::after
+                    content: ''
+                    display: block
+                    width: 10px
+                    height: 10px
+                    background-color: $primary-orange
+                    border-radius: 50%
+                    position: absolute
+                    top: 50%
+                    left: 50%
+                    transform: translate(-50%, -50%) scale(0)
+                    transition: transform 0.2s ease-in-out
+
+                input[type="radio"]:checked + .custom-radio::after
+                    transform: translate(-50%, -50%) scale(1)
 
         .items
             @include flex-container(flex, flex-start, null, column)
@@ -143,52 +139,52 @@ main
                     font-weight: 700
                     color: $black
                     opacity: 0.5
-    
+
         .text-container
-            @include flex-container(flex, null, null, column)
-            gap: 1.5rem
-
-            .total-checkout
                 @include flex-container(flex, null, null, column)
-                gap: 0.5rem
+                gap: 1.5rem
 
-            .total
-                @include flex-container(flex, space-between, center, row)
+                .total-checkout
+                    @include flex-container(flex, null, null, column)
+                    gap: 0.5rem
 
-                p
-                    text-transform: uppercase
-                    color: $black
-                    opacity: 0.5
-                    @extend .body-medium
-                    font-weight: 400
+                .total
+                    @include flex-container(flex, space-between, center, row)
 
-                span
-                    @extend .h6-manrope-bold
+                    p
+                        text-transform: uppercase
+                        color: $black
+                        opacity: 0.5
+                        @extend .body-medium
+                        font-weight: 400
 
-                .grand
-                    color: $primary-orange
+                    span
+                        @extend .h6-manrope-bold
+
+                    .grand
+                        color: $primary-orange
 
         ::ng-deep app-button > button
             width: 100%
-    label, p
-        font-size: 0.75rem
-        font-weight: 700
+label, p
+    font-size: 0.75rem
+    font-weight: 700
+    cursor: pointer
+
+input, .radio-group
+    border-radius: 0.5rem
+    border: 1px solid $border-grey
+    outline: none
+    padding: 1.125rem 1.5rem
+
+    &:hover
+        border: 1px solid $primary-orange
         cursor: pointer
-
-    input, .radio-group
-        border-radius: 0.5rem
-        border: 1px solid $border-grey
-        outline: none
-        padding: 1.125rem 1.5rem
-
-        &:hover
-            border: 1px solid $primary-orange
-            cursor: pointer
 
 
     
 @include mq(tablet)
-    main
+    form
 
         section
             width: pxToRem(689)
@@ -198,36 +194,35 @@ main
             h2
                 font-size: 2rem
 
-            form
-                .form-group
-                    #shipping
-                        @include flex-container(flex, null, null, column)
-                        gap: 1rem
+            .form-group
+                #shipping
+                    @include flex-container(flex, null, null, column)
+                    gap: 1rem
 
-                        .input-group
-                            width: 100%
-
-                    .input-fields, #shipping-info
-                        @include flex-container(flex, space-between, flex-start, row)
-                        gap: 1.5rem
-                        flex-wrap: wrap
+                    .input-group
                         width: 100%
 
-                        .input-group, .radio-group
-                            width: pxToRem(303)
+                .input-fields, #shipping-info
+                    @include flex-container(flex, space-between, flex-start, row)
+                    gap: 1.5rem
+                    flex-wrap: wrap
+                    width: 100%
 
-                            #address
-                                width: 100%
+                    .input-group, .radio-group
+                        width: pxToRem(303)
+
+                        #address
+                            width: 100%
 
                 
 @media ( min-width:  64rem)
-    main
+    form
         section
             width: pxToRem(730)
             padding: pxToRem(54) pxToRem(48)
 
 @include mq(desktop)
-    main
+    form
         @include flex-container(flex, space-between, flex-start, row)
 
         section

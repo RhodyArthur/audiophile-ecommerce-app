@@ -4,23 +4,41 @@
 @use '../../../styles/_typography' as *
 
 main
-    @include flex-container(flex, null, null, column)
-    gap: 1.5rem
-    padding: 1rem 1.5rem pxToRem(120)
     background-color: $off-white
 
-    a
-        text-decoration: none
-        cursor: pointer
-        @extend .body-medium
-        color: $black
-        opacity: 0.5
+    section
+        @include flex-container(flex, null, null, column)
+        gap: 1.5rem
+        padding: 1rem 1.5rem pxToRem(120)
+
+        a
+            text-decoration: none
+            cursor: pointer
+            @extend .body-medium
+            color: $black
+            opacity: 0.5
 
 @include mq(tablet)
     main
-        padding: pxToRem(48) 2.5rem
+        section
+            padding: pxToRem(48) 2.5rem
 
 @media ( min-width:  64rem)
     main
-        border: 1px solid green
-        padding: pxToRem(79) pxToRem(165) pxToRem(141)
+        section
+            padding: pxToRem(79) 0 pxToRem(141)
+            max-width: pxToRem(1110)
+            margin: auto
+
+            a
+                padding-inline: pxToRem(155)
+
+@include mq(desktop)
+    main
+        section
+            padding: pxToRem(79) 0 pxToRem(141)
+            max-width: pxToRem(1110)
+            margin: auto
+
+            a
+                padding-inline: 0

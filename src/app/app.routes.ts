@@ -42,6 +42,12 @@ export const routes: Routes = [
         canActivate: [authGuardGuard],
         resolve: {cartData: checkoutResolver}
     },
+    {
+        path: 'checkout-modal',
+        outlet: 'modal',
+        loadComponent: () => import('./components/modals/checkout-modal/checkout-modal').then(m => m.CheckoutModal),
+        canActivate: [authGuardGuard]
+    },
     
     {path: '**', redirectTo: ''}
 ];

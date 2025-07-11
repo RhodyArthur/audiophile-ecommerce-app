@@ -1,5 +1,8 @@
 <main>
-    <a>Go Back</a>
-
-    <app-checkout-form [cartItems]="cartItems()" [imageList]="productImagesList()" [total]="total()"/>
+    <section>
+        <a (click)="goBack()">Go Back</a>
+    
+        <app-checkout-form [cartItems]="cartItems()" [imageList]="productImagesList()" [total]="total()"/>
+    </section>
 </main>
+<router-outlet name="modal"/>
