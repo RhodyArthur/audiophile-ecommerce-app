@@ -2,7 +2,9 @@
     <section>
         <header>
             <h2>cart ({{cartService.cartCount()}})</h2>
-            <a (click)="removeall()" >Remove all</a>
+            @if (cartItems().length > 0) {
+                <a (click)="removeall()" >Remove all</a>
+            }
         </header>
 
         <div class="items">

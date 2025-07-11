@@ -1,6 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { SupabaseService } from './supabase-service';
 import { Cart } from '../models/cart';
+import { ProductImageSet } from '../models/product';
+import { ProductsService } from './products-service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +10,7 @@ import { Cart } from '../models/cart';
 export class CartService {
 
   private supabase = inject(SupabaseService);
+  private productService = inject(ProductsService);
 
   cartCount = signal<number>(0);
 
@@ -79,6 +82,20 @@ export class CartService {
       throw error;
     }
     return data
+  }
+
+  async getCartItemsWithImages(userId: string): Promise<{ items: Cart[], images: ProductImageSet[][] }> {
+    const items = await this.getCartItems(userId);
+
+    let images: ProductImageSet[][] = [];
+    if (items.length > 0) {
+      const productIds = items.map(item => item.product_id);
+      images = await Promise.all(
+        productIds.map(id => this.productService.fetchProductImagesById(id))
+      );
+    }
+
+    return { items, images };
   }
 
   async updateCartItemQuantity(itemId: number, newQuantity: number) {

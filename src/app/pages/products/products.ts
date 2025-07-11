@@ -2,7 +2,6 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { Product } from '../../models/product';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../services/products-service';
-import { Footer } from "../../components/footer/footer";
 import { About } from "../../components/about/about";
 import { ProductsCategory } from "../../components/products-category/products-category";
 import { ProductCard } from "../../components/product-card/product-card";
@@ -11,7 +10,7 @@ import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-products',
-  imports: [Footer, About, ProductsCategory, ProductCard, Spinner],
+  imports: [About, ProductsCategory, ProductCard, Spinner],
   templateUrl: './products.html',
   styleUrl: './products.sass'
 })

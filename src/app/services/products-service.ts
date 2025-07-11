@@ -10,20 +10,22 @@ export class ProductsService {
   private supabaseService = inject(SupabaseService);
 
 
-  async fetchProducts(): Promise<Product[]> {
+  async getProductSlug(productId: number): Promise<string | null> {
     const { data, error } = await this.supabaseService
-    .getClient()
-    .from('products')
-    .select('*')
-    .order('id', {ascending: true});
+      .getClient()
+      .from('products')
+      .select('slug')
+      .eq('id', productId)
+      .single();
 
     if (error) {
-      console.error(error)
-      return []
+      console.error('Error fetching product slug:', error.message);
+      return null;
     }
 
-    return data as Product[]
+    return data?.slug ?? null;
   }
+
 
   async fetchProductsByCategory(category: string) {
     const { data, error } = await this.supabaseService

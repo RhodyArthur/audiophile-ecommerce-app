@@ -1,0 +1,27 @@
+@use '../../../../styles/_breakpoints' as *
+@use '../../../../styles/_mixin' as *
+@use '../../../../styles/_typography' as *
+@use '../../../../styles/_variables' as *
+
+main
+    @include flex-container(flex, flex-start, center, column)
+    background-color: rgba(0, 0, 0, 0.6)
+    position: absolute
+    left: 0
+    right: 0
+    top: pxToRem(91)
+    height: calc( 100dvh -  91px)
+    padding: 1.5rem
+    overflow: auto
+    z-index: 1000
+
+    section
+        @include flex-container(flex, flex-start, null, column)
+        gap: 2rem
+        background-color: $white
+        width: 100%
+        border-radius: 0.5rem
+        padding: 2rem pxToRem(28)
+        overflow: scroll
+        scroll-behavior: smooth
+        scrollbar-width: none

@@ -13,10 +13,27 @@ import { Router } from '@angular/router';
 export class RelatedProductCard {
   relatedProduct = input<RelatedProduct>()
   private router = inject(Router);
+  private productService = inject(ProductsService);
 
 
-  navigateToDetails(id: number) {
-    this.router.navigate(['product-details', id])
+  async navigateToDetails(id: number) {
+    try {
+      const slug = await this.productService.getProductSlug(id);
+      console.log(slug)
+
+      if (slug) {
+        // Navigate to route based on slug
+        this.router.navigate(['/product-details', slug]);
+      } else {
+        console.error('Product slug not found');
+        // Optionally show user-friendly message
+      }
+    } catch (err) {
+      console.error('Failed to navigate to product details:', err);
+      // Optionally show toast or alert
+    }
+    
   }
+
 
 }
