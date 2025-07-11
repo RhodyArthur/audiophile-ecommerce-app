@@ -27,7 +27,7 @@
         <div class="description-button">
             <p>{{product()?.description}}</p>
     
-            <app-button [id]="productId()" (buttonClicked)="handleButtonClicked($event)"></app-button>
+            <app-button [id]="productId()" (click)="handleButtonClicked(product()!.slug)"></app-button>
         </div>
     </section>
 </main>

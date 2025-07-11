@@ -36,7 +36,7 @@ export class Cart implements OnInit, OnDestroy{
   constructor() {
     effect(() => {
       this.getUserId();
-      this.getItemsPerUser();
+      this.loadCartItemsWithImages()
     })
   }
 
@@ -44,26 +44,20 @@ export class Cart implements OnInit, OnDestroy{
     document.body.style.overflow = 'hidden';
   }
 
-  async getItemsPerUser() {
+  async loadCartItemsWithImages() {
     this.isLoading.set(true);
     try {
-      let items = await this.cartService.getCartItems(this.currentUserId());
+      const { items, images } = await this.cartService.getCartItemsWithImages(this.currentUserId());
       this.cartItems.set(items);
-      
+      this.productImagesList.set(images);
+
       const quantities: Record<number, number> = {};
-      for (const item of items) {
-        quantities[item.id] = item.quantity;
-      }
+      items.forEach(item => { quantities[item.id] = item.quantity; });
       this.itemQuantities.set(quantities);
 
-      if (items.length > 0) {
-      await this.getProductImages();
-    }
-    }
-    catch(err: any) {
-      this.hotToastService.error(err.message)
-    }
-    finally {
+    } catch (err: any) {
+      this.hotToastService.error(err.message);
+    } finally {
       this.isLoading.set(false);
     }
   }

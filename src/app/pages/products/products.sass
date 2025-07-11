@@ -6,6 +6,7 @@
 main, .product-list
     @include flex-container(flex, null, null, column)
     gap: pxToRem(120)
+    padding-bottom: pxToRem(120)
 
     header
         padding: 2rem pxToRem(84)
@@ -32,6 +33,3 @@ main, .product-list
             max-width: pxToRem(1110)
             margin: auto
             padding-inline: 0
-
-    .footer
-        background-color: $black

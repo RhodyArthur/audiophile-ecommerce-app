@@ -21,6 +21,8 @@ export class ProductCard {
   isLoading = signal<boolean>(false);
   private hotToastService = inject(HotToastService);
 
+  errorMessage = signal<string>('');
+  productSlug = signal<string>('');
   
   constructor() {
     effect(() => {
@@ -34,6 +36,7 @@ export class ProductCard {
     try {
       if (this.product()) {
         this.productId.set(this.product()!.id)
+        this.productSlug.set(this.product()!.slug)
         let images = await this.productService.fetchProductImagesById(this.productId());
         this.productImages.set(images);
       }
@@ -46,7 +49,7 @@ export class ProductCard {
     }
   }
 
-  handleButtonClicked(id: number) {
-    this.router.navigate(['product-details', id])
+  handleButtonClicked(slug: string) {
+    this.router.navigate(['product-details', slug])
   }
 }

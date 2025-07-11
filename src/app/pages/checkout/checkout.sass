@@ -1,0 +1,44 @@
+@use '../../../styles/_mixin' as *
+@use '../../../styles/_breakpoints' as *
+@use '../../../styles/_variables' as *
+@use '../../../styles/_typography' as *
+
+main
+    background-color: $off-white
+
+    section
+        @include flex-container(flex, null, null, column)
+        gap: 1.5rem
+        padding: 1rem 1.5rem pxToRem(120)
+
+        a
+            text-decoration: none
+            cursor: pointer
+            @extend .body-medium
+            color: $black
+            opacity: 0.5
+
+@include mq(tablet)
+    main
+        section
+            padding: pxToRem(48) 2.5rem
+
+@media ( min-width:  64rem)
+    main
+        section
+            padding: pxToRem(79) 0 pxToRem(141)
+            max-width: pxToRem(1110)
+            margin: auto
+
+            a
+                padding-inline: pxToRem(155)
+
+@include mq(desktop)
+    main
+        section
+            padding: pxToRem(79) 0 pxToRem(141)
+            max-width: pxToRem(1110)
+            margin: auto
+
+            a
+                padding-inline: 0

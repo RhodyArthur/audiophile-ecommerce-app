@@ -10,20 +10,22 @@ export class ProductsService {
   private supabaseService = inject(SupabaseService);
 
 
-  async fetchProducts(): Promise<Product[]> {
+  async getProductSlug(productId: number): Promise<string | null> {
     const { data, error } = await this.supabaseService
-    .getClient()
-    .from('products')
-    .select('*')
-    .order('id', {ascending: true});
+      .getClient()
+      .from('products')
+      .select('slug')
+      .eq('id', productId)
+      .single();
 
     if (error) {
-      console.error(error)
-      return []
+      console.error('Error fetching product slug:', error.message);
+      return null;
     }
 
-    return data as Product[]
+    return data?.slug ?? null;
   }
+
 
   async fetchProductsByCategory(category: string) {
     const { data, error } = await this.supabaseService
@@ -57,7 +59,7 @@ export class ProductsService {
     return data as ProductImageSet[]
   }
 
-  async fetchProductDetails(id: number) {
+  async fetchProductDetails(slug: string) {
     const { data, error } = await this.supabaseService
       .getClient()
       .from('products')
@@ -67,11 +69,11 @@ export class ProductsService {
         product_includes (*),
         product_gallery (*)
       `)
-      .eq('id', id)
+      .eq('slug', slug)
       .single();
 
     if (error) {
-      console.error('fetchProductDetails error', error);
+      console.error('fetchProductDetails error', error.message);
       return null;
     }
     return data as Product

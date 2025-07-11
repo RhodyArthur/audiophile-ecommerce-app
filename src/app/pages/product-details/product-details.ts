@@ -4,7 +4,6 @@ import { Product, RelatedProduct } from '../../models/product';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsCategory } from "../../components/products-category/products-category";
 import { About } from "../../components/about/about";
-import { Footer } from "../../components/footer/footer";
 import { ItemCard } from "../../components/item-card/item-card";
 import { Location } from '@angular/common';
 import { Spinner } from "../../shared/spinner/spinner";
@@ -13,7 +12,7 @@ import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-product-details',
-  imports: [ProductsCategory, About, Footer, ItemCard, Spinner, RelatedProductCard],
+  imports: [ProductsCategory, About, ItemCard, Spinner, RelatedProductCard],
   templateUrl: './product-details.html',
   styleUrl: './product-details.sass'
 })
@@ -25,31 +24,31 @@ export class ProductDetails {
   private hotToastService = inject(HotToastService);
   productDetails = signal<Product | null>(null);
   relatedProducts = signal<RelatedProduct[]>([]);
-  productId = signal<number>(0);
   isLoading = signal<boolean>(false);
+  productSlug = signal<string>('');
   
 
   constructor() {
     effect(() => {
-      this.loadFullProduct(this.productId())
-      this.loadRelatedProducts(this.productId())
+      this.loadFullProduct(this.productSlug())
     })
 
     this.route.paramMap.subscribe(params => {
-      let id = params.get('id');
+      let slug = params.get('slug');
 
-      if (id) {
-        this.productId.set(Number(id))
+      if (slug) {
+        this.productSlug.set(slug)
       }
     })
   }
 
-  private async loadFullProduct(id: number) {
+  private async loadFullProduct(slug: string) {
     this.isLoading.set(true);
 
     try {
-      const full = await this.productService.fetchProductDetails(id);
+      const full = await this.productService.fetchProductDetails(slug);
       this.productDetails.set(full);
+      this.loadRelatedProducts(full!.id)
     } catch (err) {
       console.error('Failed loading product assets', err);
       this.hotToastService.error('Failed loading product assets')
@@ -62,10 +61,9 @@ export class ProductDetails {
 
   private async loadRelatedProducts(id: number) {
     this.isLoading.set(true);
-
     try {
-      const full = await this.productService.fetchRelatedProductsById(id);
-      this.relatedProducts.set(full);
+        const full = await this.productService.fetchRelatedProductsById(id);
+        this.relatedProducts.set(full);
     } catch (err) {
       console.error('Failed loading related product assets', err);
       this.hotToastService.error('Failed loading related product assets')
