@@ -7,25 +7,26 @@ import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-checkout',
-  imports: [CheckoutForm, RouterOutlet],
+  imports: [CheckoutForm],
   templateUrl: './checkout.html',
   styleUrl: './checkout.sass'
 })
 export class Checkout {
 
   private route = inject(ActivatedRoute);
-    private location = inject(Location);
+  private location = inject(Location);
 
   cartItems = signal<Cart[]>([]);
   productImagesList = signal<ProductImageSet[][]>([]);
+  total = signal<number>(0);
 
   constructor() {
     const resolved = this.route.snapshot.data['cartData'];
     this.cartItems.set(resolved.items);
     this.productImagesList.set(resolved.images);
+    this.total.set(resolved.total);
   }
 
-  total = computed(() => this.cartItems().reduce((total, item) => total + item.quantity * item.price, 0))
 
   goBack() {
     this.location.back();
