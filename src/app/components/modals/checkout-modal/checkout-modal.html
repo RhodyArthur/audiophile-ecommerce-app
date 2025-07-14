@@ -2,6 +2,59 @@
 
     <section>
 
-        <p>checkout-modal works!</p>
+        <div class="circle">
+            <img src="/assets/icons/check.svg" alt="check icon">
+        </div>
+
+        <div class="text-container">
+            <h2>thank you for your order</h2>
+            <p>Hope to see you soon</p>
+        </div>
+
+        <div class="card">
+            <div class="top">
+                <div class="items">
+                    @for (item of visibleItems(); track item.id) {
+                        <div class="item">
+                                <div class="left-side">
+            
+                                    @if (imageList()[$index]) {
+                                        <div class="image">
+                                            <img 
+                                                [src]="imageList()[$index][0].mobile_url" 
+                                                alt="Product image"
+                                            />
+                                        </div>
+                                }
+            
+                                    <div class="col">
+                                        <p class="name">{{item.name | slice:1:12}}</p>
+                                        <span class="price">{{item.price | currency:'USD':'symbol':'1.0-0'}}</span>
+                                    </div>
+                                </div>
+            
+                                <span class="quantity">x{{item.quantity}}</span>
+                        </div>
+                    }
+        </div>
+
+                <hr>
+
+                @if (!showAll() && remainingItemsCount() > 0) {
+                    <p class="toggle" (click)="showAll.set(true)">and {{remainingItemsCount()}} other item(s)</p>
+                }
+                @else if (showAll() && remainingItemsCount() > 0) {
+                    <p class="toggle" (click)="showAll.set(false)">View less</p>
+                }
+
+            </div>
+
+            <div class="total">
+                <p>grand total</p>
+                <span>{{grandTotal() | currency:'USD':'symbol':'1.0-0'}}</span>
+            </div>
+        </div>
+
+        <app-button [label]="'back to home'" (click)="backToHome()"/>
     </section>
 </main>

@@ -84,7 +84,7 @@ export class CartService {
     return data
   }
 
-  async getCartItemsWithImages(userId: string): Promise<{ items: Cart[], images: ProductImageSet[][] }> {
+  async getCartItemsWithImages(userId: string): Promise<{ items: Cart[], images: ProductImageSet[][], total: number }> {
     const items = await this.getCartItems(userId);
 
     let images: ProductImageSet[][] = [];
@@ -94,8 +94,11 @@ export class CartService {
         productIds.map(id => this.productService.fetchProductImagesById(id))
       );
     }
+    const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-    return { items, images };
+
+
+    return { items, images, total };
   }
 
   async updateCartItemQuantity(itemId: number, newQuantity: number) {

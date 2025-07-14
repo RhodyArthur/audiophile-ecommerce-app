@@ -57,7 +57,6 @@ export class CheckoutForm {
      this.checkoutForm.markAllAsTouched();
      return;
     }
-
     this.toast.success('Order placed successfully');
     this.router.navigate(
       [{ outlets: { modal: ['checkout-modal'] } }],
