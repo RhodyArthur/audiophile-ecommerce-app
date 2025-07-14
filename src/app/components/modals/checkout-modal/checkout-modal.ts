@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductImageSet } from '../../../models/product';
 import { Cart } from '../../../models/cart';
 import { CurrencyPipe, SlicePipe } from '@angular/common';
+import { CartService } from '../../../services/cart-service';
+import { AuthService } from '../../../services/auth-service';
 
 @Component({
   selector: 'app-checkout-modal',
@@ -15,11 +17,14 @@ export class CheckoutModal implements OnInit, OnDestroy{
 
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private cartService = inject(CartService);
+  private authService = inject(AuthService);
 
   cartItems = signal<Cart[]>([]);
   imageList = signal<ProductImageSet[][]>([]);
   total = signal<number>(0);
   showAll = signal<boolean>(false);
+  currentUserId = signal<string>('');
   
 
   constructor() {
@@ -27,6 +32,11 @@ export class CheckoutModal implements OnInit, OnDestroy{
     this.cartItems.set(resolved.items);
     this.imageList.set(resolved.images);
     this.total.set(resolved.total);
+
+    if(this.authService.currentUser()) {
+      let id = this.authService.currentUser()?.id
+      this.currentUserId.set(String(id))
+    }
   }
 
   ngOnInit() {
@@ -46,8 +56,15 @@ export class CheckoutModal implements OnInit, OnDestroy{
     this.router.navigate([{ outlets: { modal: null } }], { relativeTo: this.route.parent })
     .then(() => {
       this.router.navigate(['/']);
+      this.cartService.deleteAllCartItems(this.currentUserId());
+      this.cartService.fetchCartCount(this.currentUserId());
     });
   }
+
+  closeModal() {
+    this.router.navigate([{ outlets: { modal: null } }], { relativeTo: this.route.parent })
+  }
+
   ngOnDestroy() {
     document.body.style.overflow = '';
   }
