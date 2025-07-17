@@ -10,7 +10,14 @@
             <li><a (click)="navigateAndClose('headphones')">Headphones</a></li>
             <li><a (click)="navigateAndClose('speakers')">Speakers</a></li>
             <li><a (click)="navigateAndClose('earphones')">Earphones</a></li>
-            <li><a (click)="navigateAndCloseProfile()">Profile</a></li>
+            @if (authService.currentUser()) {
+                <li><a (click)="navigateAndCloseProfile('profile')">Profile</a></li>
+            }
+            @else {
+                <li><a (click)="navigateAndCloseProfile('login')">Login</a></li>
+                
+            }
+            
         </ul>
     </nav>
 </main>

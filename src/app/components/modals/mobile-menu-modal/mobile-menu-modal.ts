@@ -1,5 +1,6 @@
 import { Component, inject, output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth-service';
 
 @Component({
   selector: 'app-mobile-menu-modal',
@@ -9,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class MobileMenuModal {
   private router = inject(Router);
-  private route = inject(ActivatedRoute);
+  protected authService = inject(AuthService);
   close = output<void>();
 
   ngOnInit() {
@@ -26,9 +27,9 @@ export class MobileMenuModal {
     this.router.navigate(['product', category]);
   }
 
-  navigateAndCloseProfile() {
+  navigateAndCloseProfile(route: string) {
     this.close.emit();
-    this.router.navigate(['profile']);
+    this.router.navigate([route]);
   }
 
   ngOnDestroy() {
