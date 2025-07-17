@@ -2,10 +2,11 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth-service';
 import { CartService } from '../../services/cart-service';
+import { MobileMenuModal } from "../modals/mobile-menu-modal/mobile-menu-modal";
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, MobileMenuModal],
   templateUrl: './header.html',
   styleUrl: './header.sass'
 })
@@ -15,6 +16,7 @@ export class Header {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   isModalOpen = signal<boolean>(false);
+  isMenuOpen = signal(false);
 
   constructor() {
     effect(() =>{
@@ -39,5 +41,13 @@ export class Header {
       this.isModalOpen.set(false);
     }
 
+  }
+
+  toggleModal() {
+    this.isMenuOpen.set(!this.isMenuOpen());
+  }
+
+  closeModal() {
+    this.isMenuOpen.set(false);
   }
 }

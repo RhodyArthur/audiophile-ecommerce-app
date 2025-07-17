@@ -49,6 +49,11 @@ export const routes: Routes = [
         canActivate: [authGuardGuard],
         resolve: {cartData: checkoutResolver}
     },
+    {
+        path: 'profile',
+        loadComponent: () => import('./pages/profile/profile').then(m => m.Profile),
+        canActivate: [authGuardGuard]
+    },
     
     {path: '**', redirectTo: ''}
 ];
