@@ -1,0 +1,66 @@
+@use '../../../../styles/_breakpoints' as *
+@use '../../../../styles/_mixin' as *
+@use '../../../../styles/_typography' as *
+@use '../../../../styles/_variables' as *
+
+main
+    @include flex-container(flex, flex-start, flex-start, column)
+    background-color: rgba(0, 0, 0, 0.6)
+    position: absolute
+    left: 0
+    right: 0
+    top: pxToRem(91)
+    height: calc( 100dvh -  91px)
+    overflow: auto
+    z-index: 1000
+
+    nav
+        @include flex-container(flex, flex-start, flex-start, column)
+        gap: 1.5rem
+        background-color: $white
+        width: pxToRem(200)
+        height: 100%
+        padding: 1.5rem
+
+        .sidebar-header
+            @include flex-container(flex, space-between, center, row)
+            width: 100%
+
+            button
+                background: transparent
+                border: none
+                outline: none
+                font-size: 0.875rem
+                font-weight: 700
+
+                &:hover
+                    cursor: pointer
+                    color: $red
+
+        .nav-list
+            @include flex-container(flex, null, flex-start, column)
+            gap: 0.5rem
+            list-style: none
+            width: 100%
+            
+
+            li
+                width: 100%
+                padding: 0.25rem 0
+                border-radius: 4px
+
+                &:hover
+                    background-color: $primary-orange
+                    border-left: 1px solid $white
+
+                a
+                    text-decoration: none
+                    color: $black
+
+                    &:hover
+                        color: $white
+                        cursor: pointer
+
+@include mq(desktop)
+    main
+        display: none

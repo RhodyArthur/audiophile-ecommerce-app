@@ -1,5 +1,5 @@
 <header>
-    <img src="/assets/icons/hamburger.svg" alt="menu icon" class="menu">
+    <img src="/assets/icons/hamburger.svg" alt="menu icon" class="menu" (click)="toggleModal()">
 
     <h3>audiophile</h3>
 
@@ -23,5 +23,8 @@
         <span>{{cartService.cartCount()}}</span>
     </div>
 </header>
+@if (isMenuOpen()) {
+    <app-mobile-menu-modal (close)="closeModal()"/>
+}
 <router-outlet name="modal"/>
 

@@ -1,0 +1,16 @@
+<main (click)="closeModal()">
+    
+    <nav (click)="$event.stopPropagation()">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+            <button class="close-btn" (click)="closeModal()">X</button>
+        </div>
+
+        <ul class="nav-list">
+            <li><a (click)="navigateAndClose('headphones')">Headphones</a></li>
+            <li><a (click)="navigateAndClose('speakers')">Speakers</a></li>
+            <li><a (click)="navigateAndClose('earphones')">Earphones</a></li>
+            <li><a (click)="navigateAndCloseProfile()">Profile</a></li>
+        </ul>
+    </nav>
+</main>
