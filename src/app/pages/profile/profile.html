@@ -1,1 +1,16 @@
-<p>profile works!</p>
+<main>
+
+    @if (isLoading()) {
+        <app-spinner />
+    }
+    
+    @if (!isLoading() && userData()) {
+    
+        <div class="profile-card">
+          <img [src]="userData()?.avatar_url || '/assets/shared/mobile/avatar.png'" alt="Avatar" class="avatar" />
+          <h2>{{ userData()?.full_name }}</h2>
+          <p>{{ userEmail()}}</p>
+          <button (click)="logout()">Log out</button>
+        </div>
+    }
+</main>

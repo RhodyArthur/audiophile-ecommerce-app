@@ -9,7 +9,7 @@
         <a routerLinkActive="active" [routerLink]="['/product', 'speakers']" [routerLinkActiveOptions]="{ exact: true }">SPEAKERS</a>
         <a routerLinkActive="active" [routerLink]="['/product', 'earphones']" [routerLinkActiveOptions]="{ exact: true }">EARPHONES</a>
         @if (authService.currentUser()) {
-            <a>PROFILE</a>
+            <a routerLinkActive="active" routerLink="profile">PROFILE</a>
         }
         @else {
 
