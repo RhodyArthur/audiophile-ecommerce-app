@@ -30,7 +30,6 @@ export class Login {
       this.isLoading.set(true);
       try {
         await this.authService.logIn(email, password);
-        this.hotToastService.success('Login successful')
         this.router.navigate(['/'])
         this.clearForm();
       }
@@ -40,7 +39,7 @@ export class Login {
         this.errorMessage.set('Check your mail to confirm your email');
         this.hotToastService.error(this.errorMessage())
         } else {
-          this.errorMessage.set('Failed to log in.');
+          this.errorMessage.set('Failed to log in, check your credentials');
           this.hotToastService.error(this.errorMessage())
         }
       }
