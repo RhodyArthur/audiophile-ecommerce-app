@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../services/auth-service';
 import { HotToastService } from '@ngxpert/hot-toast';
+import { getControlErrorMessage } from '../../../shared/utils/validator-messages';
 
 @Component({
   selector: 'app-login',
@@ -19,14 +20,14 @@ export class Login {
   errorMessage = signal<string>('');
   isLoading = signal<boolean>(false);
 
-  loginFom: FormGroup = this.fb.group({
-       email: ['', [Validators.required, Validators.email]],
+  loginForm: FormGroup = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
   })
 
   async submit() {
-    if(this.loginFom.valid) {
-      const {email, password} = this.loginFom.value
+    if(this.loginForm.valid) {
+      const {email, password} = this.loginForm.value
       this.isLoading.set(true);
       try {
         await this.authService.logIn(email, password);
@@ -49,8 +50,16 @@ export class Login {
     }
   }
 
+   get emailErrorMessage(): string | null {
+    return getControlErrorMessage(this.loginForm.get('email'));
+  }
+
+  get passwordErrorMessage():string | null {
+    return getControlErrorMessage(this.loginForm.get('password'));
+  }
+  
   clearForm() {
-    this.loginFom.reset()
+    this.loginForm.reset()
   }
 
 }

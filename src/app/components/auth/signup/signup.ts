@@ -5,6 +5,7 @@ import { passwordMatchValidator } from '../../../shared/validators/passwordMatch
 import { passwordStructureValidator } from '../../../shared/validators/passwordStructure';
 import { AuthService } from '../../../services/auth-service';
 import { HotToastService } from '@ngxpert/hot-toast';
+import { getControlErrorMessage } from '../../../shared/utils/validator-messages';
 
 @Component({
   selector: 'app-signup',
@@ -52,6 +53,22 @@ export class Signup {
     }
   }
 }
+
+  get nameErrorMessage(): string | null {
+    return getControlErrorMessage(this.signupForm.get('fullName'));
+  }
+
+  get emailErrorMessage(): string | null {
+    return getControlErrorMessage(this.signupForm.get('email'));
+  }
+
+  get passwordErrorMessage():string | null {
+    return getControlErrorMessage(this.signupForm.get('password'));
+  }
+
+  get confirmPasswordErrorMessage(): string | null {
+    return getControlErrorMessage(this.signupForm.get('repeatPassword'))
+  }
 
   
   clearForm() {

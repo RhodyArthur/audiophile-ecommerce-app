@@ -5,6 +5,7 @@ import { passwordStructureValidator } from '../../../shared/validators/passwordS
 import { AuthService } from '../../../services/auth-service';
 import { Router, RouterLink } from '@angular/router';
 import { HotToastService } from '@ngxpert/hot-toast';
+import { getControlErrorMessage } from '../../../shared/utils/validator-messages';
 
 @Component({
   selector: 'app-password-reset',
@@ -50,5 +51,13 @@ export class PasswordReset {
         this.isLoading.set(false);
       }
     }
+  }
+
+  get passwordErrorMessage():string | null {
+    return getControlErrorMessage(this.resetForm.get('password'));
+  }
+
+  get confirmPasswordErrorMessage(): string | null {
+    return getControlErrorMessage(this.resetForm.get('repeatPassword'))
   }
 }

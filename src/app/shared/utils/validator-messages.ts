@@ -26,7 +26,7 @@ export function getControlErrorMessage(control: AbstractControl | null, customMe
       return customMessages?.['noSpecialChar'] || 'Password must include at least one special character (!@#$%^&*...).';
     }
     if (errors['minlength']) { 
-      return customMessages?.['minlength'] || `Password must be at least ${errors['minlength'].requiredLength} characters long.`;
+      return customMessages?.['minlength'] || `This field must be at least ${errors['minlength'].requiredLength} characters long.`;
     }
     if (errors['tooShort']) {
       const requiredLength = errors['tooShort']['requiredLength'];
