@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth-service';
 import { HotToastService } from '@ngxpert/hot-toast';
+import { getControlErrorMessage } from '../../../shared/utils/validator-messages';
 
 @Component({
   selector: 'app-forgot-password',
@@ -41,4 +42,9 @@ export class ForgotPassword {
       }
     }
   }
+
+   get emailErrorMessage(): string | null {
+    return getControlErrorMessage(this.form.get('email'));
+  }
+
 }

@@ -1,7 +1,7 @@
 <header>
     <img src="/assets/icons/hamburger.svg" alt="menu icon" class="menu" (click)="toggleModal()">
 
-    <h3>audiophile</h3>
+    <h3 [routerLink]="'/'">audiophile</h3>
 
     <nav class="hidden">
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">HOME</a>
