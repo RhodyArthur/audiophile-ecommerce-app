@@ -6,22 +6,30 @@ export function passwordStructureValidator(): ValidatorFn {
 
     if (!value) return null;
 
+    const errors: ValidationErrors = {};
+
     const hasUpperCase = /[A-Z]/.test(value);
     const hasLowerCase = /[a-z]/.test(value);
     const hasNumber = /[0-9]/.test(value);
     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
     const isLongEnough = value.length >= 8;
 
-    const valid = hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar && isLongEnough;
+    if (!hasUpperCase) {
+      errors['noUppercase'] = true;
+    }
+    if (!hasLowerCase) {
+      errors['noLowercase'] = true;
+    }
+    if (!hasNumber) {
+      errors['noNumber'] = true;
+    }
+    if (!hasSpecialChar) {
+      errors['noSpecialChar'] = true;
+    }
+    if (!isLongEnough) {
+      errors['tooShort'] = { requiredLength: 8, actualLength: value.length };
+    }
 
-    return valid ? null : {
-      passwordStructure: {
-        hasUpperCase,
-        hasLowerCase,
-        hasNumber,
-        hasSpecialChar,
-        isLongEnough
-      }
-    };
+    return Object.keys(errors).length > 0 ? errors : null;
   };
 }

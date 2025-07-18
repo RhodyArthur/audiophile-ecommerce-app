@@ -6,35 +6,29 @@
         @if(errorMessage()) {
             <p class="error">{{errorMessage()}}</p>
         }
-        <form [formGroup]="loginFom" (ngSubmit)="submit()">
+        <form [formGroup]="loginForm" (ngSubmit)="submit()">
 
             <div class="input-fields">
 
                 <div class="input-group">
                     <input type="email" name="email" id="email" placeholder="Email address" formControlName="email">
-                    @if (loginFom.get('email')?.invalid && (loginFom.get('email')?.touched || loginFom.get('email')?.dirty)) {
-                    @if (loginFom.get('email')?.errors?.['required']) {
-                        <small class="error">Can't be empty</small>
+                    @if (emailErrorMessage) {
+                        <small class="error">{{ emailErrorMessage }}</small>
                     }
-                    @if (loginFom.get('email')?.errors?.['email']) {
-                        <small class="error">Invalid Email</small>
-                    }
-                }
                 </div>
     
                 <div class="input-group">
                     <input type="password" name="password" id="password" placeholder="Password" formControlName="password">
-                    @if(loginFom.get('password')?.invalid && (loginFom.get('password')?.touched || loginFom.get('password')?.dirty)){
-                    @if (loginFom.get('password')?.errors?.['required']) {
-                        <small class="error">Can't be empty</small>
-                    }}
+                    @if (passwordErrorMessage) {
+                        <small class="error">{{ passwordErrorMessage }}</small>
+                    }
                     <a [routerLink]="['/forgot-password']">Forgot Password?</a>
                 </div>
             </div>
 
             <div class="btn-container">
 
-                <button type="submit" [disabled]="!loginFom.valid">
+                <button type="submit" [disabled]="!loginForm.valid">
                     @if (isLoading()) {
                         loading...
                     }
